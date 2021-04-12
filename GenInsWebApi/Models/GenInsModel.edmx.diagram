@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12f179df53b84784aa4ae35b119133a7" Name="Diagram1">
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Admin" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Brand_Names" Width="1.5" PointX="1.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Claim_Insurance" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Depreciation_Percentage" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Model_od_prem_amt" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.No_Claim_Bonus" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Payment" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Policy_Plans" Width="1.5" PointX="3.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Subscription_plan" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.sysdiagram" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Third_Party_Prem" Width="1.5" PointX="5.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.User_Registration" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="GeneralInsuranceModel.Vehicle_Info" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Model_od___Brand__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Claim_Ins__Polic__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Vehicle_I__Model__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Payments__Policy__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Payments__User_I__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Subscript__Polic__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Subscript__Reg_N__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Subscript__User___38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="GeneralInsuranceModel.FK__Vehicle_I__User___2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

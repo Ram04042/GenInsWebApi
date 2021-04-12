@@ -1,0 +1,805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GeneralInsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Brand_Names">
+          <Key>
+            <PropertyRef Name="Brand_Id" />
+          </Key>
+          <Property Name="Brand_Id" Type="int" Nullable="false" />
+          <Property Name="Brand_Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Claim_Insurance">
+          <Key>
+            <PropertyRef Name="Claim_no" />
+          </Key>
+          <Property Name="Claim_no" Type="int" Nullable="false" />
+          <Property Name="Policy_No" Type="varchar" MaxLength="10" />
+          <Property Name="Reasons" Type="varchar" MaxLength="50" />
+          <Property Name="Date_claimed" Type="date" />
+          <Property Name="Date_of_Loss" Type="date" />
+          <Property Name="Place_of_Loss" Type="varchar" MaxLength="20" />
+          <Property Name="Damage_Description" Type="varchar" MaxLength="100" />
+          <Property Name="Injury_to_Thirdparty" Type="bit" />
+          <Property Name="Claim_approval_status" Type="varchar" MaxLength="20" />
+          <Property Name="Claim_amt" Type="money" />
+        </EntityType>
+        <EntityType Name="Depreciation_Percentage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Depreciation_percentage" Type="int" />
+        </EntityType>
+        <EntityType Name="Model_od_prem_amt">
+          <Key>
+            <PropertyRef Name="Model_Name" />
+          </Key>
+          <Property Name="Model_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="vehicle_type" Type="varchar" MaxLength="20" />
+          <Property Name="Veh_based_od_prem" Type="int" />
+          <Property Name="Brand_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="No_Claim_Bonus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="No_of_cons_yr_not_claimed" Type="int" />
+          <Property Name="Discount_percentage" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Payment_id" />
+          </Key>
+          <Property Name="Payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Policy_No" Type="varchar" MaxLength="10" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Payment_date" Type="date" />
+          <Property Name="Card_type" Type="varchar" MaxLength="20" />
+          <Property Name="Card_number" Type="int" />
+          <Property Name="Exp_date" Type="date" />
+          <Property Name="Payment_status" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Policy_Plans">
+          <Key>
+            <PropertyRef Name="Policy_plan_id" />
+          </Key>
+          <Property Name="Policy_plan_id" Type="int" Nullable="false" />
+          <Property Name="Plan_type" Type="varchar" MaxLength="10" />
+          <Property Name="Duration" Type="int" />
+        </EntityType>
+        <EntityType Name="Subscription_plan">
+          <Key>
+            <PropertyRef Name="Policy_No" />
+          </Key>
+          <Property Name="Policy_No" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Policy_plan_id" Type="int" />
+          <Property Name="Reg_No" Type="varchar" MaxLength="10" />
+          <Property Name="Sub_date" Type="date" />
+          <Property Name="Status_of_sub" Type="varchar" MaxLength="15" />
+          <Property Name="Market_price" Type="money" />
+          <Property Name="IDV" Type="money" />
+          <Property Name="Total_tp_prem_amt" Type="money" />
+          <Property Name="Total_od_prem_amt" Type="money" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Third_Party_Prem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Vehicle_CC_Min" Type="int" />
+          <Property Name="Vehicle_CC_Max" Type="int" />
+          <Property Name="Vehicle_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Fixed_TP_Prem" Type="int" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email_ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone_No" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Vehicle_Info">
+          <Key>
+            <PropertyRef Name="Reg_No" />
+          </Key>
+          <Property Name="Reg_No" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Vehicle_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Manufacturer_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Driving_license" Type="varchar" MaxLength="20" />
+          <Property Name="Veh_purchase_date" Type="date" />
+          <Property Name="User_Id" Type="int" />
+          <Property Name="Model_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Chasis_No" Type="int" />
+          <Property Name="Vehicle_CC" Type="int" />
+          <Property Name="Market_price" Type="money" />
+        </EntityType>
+        <Association Name="FK__Claim_Ins__Polic__412EB0B6">
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="0..1" />
+          <End Role="Claim_Insurance" Type="Self.Claim_Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription_plan">
+              <PropertyRef Name="Policy_No" />
+            </Principal>
+            <Dependent Role="Claim_Insurance">
+              <PropertyRef Name="Policy_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Model_od___Brand__2A4B4B5E">
+          <End Role="Brand_Names" Type="Self.Brand_Names" Multiplicity="0..1" />
+          <End Role="Model_od_prem_amt" Type="Self.Model_od_prem_amt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand_Names">
+              <PropertyRef Name="Brand_Id" />
+            </Principal>
+            <Dependent Role="Model_od_prem_amt">
+              <PropertyRef Name="Brand_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Policy__3D5E1FD2">
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription_plan">
+              <PropertyRef Name="Policy_No" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Policy_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__User_I__3E52440B">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Polic__398D8EEE">
+          <End Role="Policy_Plans" Type="Self.Policy_Plans" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Policy_Plans">
+              <PropertyRef Name="Policy_plan_id" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="Policy_plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Reg_N__3A81B327">
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle_Info">
+              <PropertyRef Name="Reg_No" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="Reg_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__User___38996AB5">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_I__Model__2E1BDC42">
+          <End Role="Model_od_prem_amt" Type="Self.Model_od_prem_amt" Multiplicity="0..1" />
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model_od_prem_amt">
+              <PropertyRef Name="Model_Name" />
+            </Principal>
+            <Dependent Role="Vehicle_Info">
+              <PropertyRef Name="Model_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_I__User___2D27B809">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Vehicle_Info">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GeneralInsuranceModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Claim_Insurance" EntityType="Self.Claim_Insurance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depreciation_Percentage" EntityType="Self.Depreciation_Percentage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model_od_prem_amt" EntityType="Self.Model_od_prem_amt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="No_Claim_Bonus" EntityType="Self.No_Claim_Bonus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Policy_Plans" EntityType="Self.Policy_Plans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscription_plan" EntityType="Self.Subscription_plan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Third_Party_Prem" EntityType="Self.Third_Party_Prem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicle_Info" EntityType="Self.Vehicle_Info" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Claim_Ins__Polic__412EB0B6" Association="Self.FK__Claim_Ins__Polic__412EB0B6">
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+            <End Role="Claim_Insurance" EntitySet="Claim_Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Model_od___Brand__2A4B4B5E" Association="Self.FK__Model_od___Brand__2A4B4B5E">
+            <End Role="Brand_Names" EntitySet="Brand_Names" />
+            <End Role="Model_od_prem_amt" EntitySet="Model_od_prem_amt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Policy__3D5E1FD2" Association="Self.FK__Payments__Policy__3D5E1FD2">
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__User_I__3E52440B" Association="Self.FK__Payments__User_I__3E52440B">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Polic__398D8EEE" Association="Self.FK__Subscript__Polic__398D8EEE">
+            <End Role="Policy_Plans" EntitySet="Policy_Plans" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Reg_N__3A81B327" Association="Self.FK__Subscript__Reg_N__3A81B327">
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__User___38996AB5" Association="Self.FK__Subscript__User___38996AB5">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_I__Model__2E1BDC42" Association="Self.FK__Vehicle_I__Model__2E1BDC42">
+            <End Role="Model_od_prem_amt" EntitySet="Model_od_prem_amt" />
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_I__User___2D27B809" Association="Self.FK__Vehicle_I__User___2D27B809">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GeneralInsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Brand_Names">
+          <Key>
+            <PropertyRef Name="Brand_Id" />
+          </Key>
+          <Property Name="Brand_Id" Type="Int32" Nullable="false" />
+          <Property Name="Brand_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Model_od_prem_amt" Relationship="Self.FK__Model_od___Brand__2A4B4B5E" FromRole="Brand_Names" ToRole="Model_od_prem_amt" />
+        </EntityType>
+        <EntityType Name="Claim_Insurance">
+          <Key>
+            <PropertyRef Name="Claim_no" />
+          </Key>
+          <Property Name="Claim_no" Type="Int32" Nullable="false" />
+          <Property Name="Policy_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Reasons" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Date_claimed" Type="DateTime" Precision="0" />
+          <Property Name="Date_of_Loss" Type="DateTime" Precision="0" />
+          <Property Name="Place_of_Loss" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Damage_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Injury_to_Thirdparty" Type="Boolean" />
+          <Property Name="Claim_approval_status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Claim_amt" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Claim_Ins__Polic__412EB0B6" FromRole="Claim_Insurance" ToRole="Subscription_plan" />
+        </EntityType>
+        <EntityType Name="Depreciation_Percentage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Depreciation_percentage1" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Model_od_prem_amt">
+          <Key>
+            <PropertyRef Name="Model_Name" />
+          </Key>
+          <Property Name="Model_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vehicle_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Veh_based_od_prem" Type="Int32" />
+          <Property Name="Brand_Id" Type="Int32" />
+          <NavigationProperty Name="Brand_Names" Relationship="Self.FK__Model_od___Brand__2A4B4B5E" FromRole="Model_od_prem_amt" ToRole="Brand_Names" />
+          <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Vehicle_I__Model__2E1BDC42" FromRole="Model_od_prem_amt" ToRole="Vehicle_Info" />
+        </EntityType>
+        <EntityType Name="No_Claim_Bonus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="No_of_cons_yr_not_claimed" Type="Int32" />
+          <Property Name="Discount_percentage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Payment_id" />
+          </Key>
+          <Property Name="Payment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Policy_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Payment_date" Type="DateTime" Precision="0" />
+          <Property Name="Card_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Card_number" Type="Int32" />
+          <Property Name="Exp_date" Type="DateTime" Precision="0" />
+          <Property Name="Payment_status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Payments__Policy__3D5E1FD2" FromRole="Payments" ToRole="Subscription_plan" />
+          <NavigationProperty Name="User_Registration" Relationship="Self.FK__Payments__User_I__3E52440B" FromRole="Payments" ToRole="User_Registration" />
+        </EntityType>
+        <EntityType Name="Policy_Plans">
+          <Key>
+            <PropertyRef Name="Policy_plan_id" />
+          </Key>
+          <Property Name="Policy_plan_id" Type="Int32" Nullable="false" />
+          <Property Name="Plan_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" />
+          <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Subscript__Polic__398D8EEE" FromRole="Policy_Plans" ToRole="Subscription_plan" />
+        </EntityType>
+        <EntityType Name="Subscription_plan">
+          <Key>
+            <PropertyRef Name="Policy_No" />
+          </Key>
+          <Property Name="Policy_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Policy_plan_id" Type="Int32" />
+          <Property Name="Reg_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Sub_date" Type="DateTime" Precision="0" />
+          <Property Name="Status_of_sub" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Market_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IDV" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total_tp_prem_amt" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Total_od_prem_amt" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Claim_Insurance" Relationship="Self.FK__Claim_Ins__Polic__412EB0B6" FromRole="Subscription_plan" ToRole="Claim_Insurance" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Policy__3D5E1FD2" FromRole="Subscription_plan" ToRole="Payments" />
+          <NavigationProperty Name="Policy_Plans" Relationship="Self.FK__Subscript__Polic__398D8EEE" FromRole="Subscription_plan" ToRole="Policy_Plans" />
+          <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Subscript__Reg_N__3A81B327" FromRole="Subscription_plan" ToRole="Vehicle_Info" />
+          <NavigationProperty Name="User_Registration" Relationship="Self.FK__Subscript__User___38996AB5" FromRole="Subscription_plan" ToRole="User_Registration" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Third_Party_Prem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Vehicle_CC_Min" Type="Int32" />
+          <Property Name="Vehicle_CC_Max" Type="Int32" />
+          <Property Name="Vehicle_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Fixed_TP_Prem" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="User_Id" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__User_I__3E52440B" FromRole="User_Registration" ToRole="Payments" />
+          <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Subscript__User___38996AB5" FromRole="User_Registration" ToRole="Subscription_plan" />
+          <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Vehicle_I__User___2D27B809" FromRole="User_Registration" ToRole="Vehicle_Info" />
+        </EntityType>
+        <EntityType Name="Vehicle_Info">
+          <Key>
+            <PropertyRef Name="Reg_No" />
+          </Key>
+          <Property Name="Reg_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vehicle_Type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Manufacturer_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Driving_license" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Veh_purchase_date" Type="DateTime" Precision="0" />
+          <Property Name="User_Id" Type="Int32" />
+          <Property Name="Model_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Chasis_No" Type="Int32" />
+          <Property Name="Vehicle_CC" Type="Int32" />
+          <Property Name="Market_price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Model_od_prem_amt" Relationship="Self.FK__Vehicle_I__Model__2E1BDC42" FromRole="Vehicle_Info" ToRole="Model_od_prem_amt" />
+          <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Subscript__Reg_N__3A81B327" FromRole="Vehicle_Info" ToRole="Subscription_plan" />
+          <NavigationProperty Name="User_Registration" Relationship="Self.FK__Vehicle_I__User___2D27B809" FromRole="Vehicle_Info" ToRole="User_Registration" />
+        </EntityType>
+        <Association Name="FK__Model_od___Brand__2A4B4B5E">
+          <End Role="Brand_Names" Type="Self.Brand_Names" Multiplicity="0..1" />
+          <End Role="Model_od_prem_amt" Type="Self.Model_od_prem_amt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand_Names">
+              <PropertyRef Name="Brand_Id" />
+            </Principal>
+            <Dependent Role="Model_od_prem_amt">
+              <PropertyRef Name="Brand_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Claim_Ins__Polic__412EB0B6">
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="0..1" />
+          <End Role="Claim_Insurance" Type="Self.Claim_Insurance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription_plan">
+              <PropertyRef Name="Policy_No" />
+            </Principal>
+            <Dependent Role="Claim_Insurance">
+              <PropertyRef Name="Policy_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_I__Model__2E1BDC42">
+          <End Role="Model_od_prem_amt" Type="Self.Model_od_prem_amt" Multiplicity="0..1" />
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model_od_prem_amt">
+              <PropertyRef Name="Model_Name" />
+            </Principal>
+            <Dependent Role="Vehicle_Info">
+              <PropertyRef Name="Model_Name" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Policy__3D5E1FD2">
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription_plan">
+              <PropertyRef Name="Policy_No" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="Policy_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__User_I__3E52440B">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Polic__398D8EEE">
+          <End Role="Policy_Plans" Type="Self.Policy_Plans" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Policy_Plans">
+              <PropertyRef Name="Policy_plan_id" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="Policy_plan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__Reg_N__3A81B327">
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicle_Info">
+              <PropertyRef Name="Reg_No" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="Reg_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subscript__User___38996AB5">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Subscription_plan">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_I__User___2D27B809">
+          <End Role="User_Registration" Type="Self.User_Registration" Multiplicity="0..1" />
+          <End Role="Vehicle_Info" Type="Self.Vehicle_Info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Registration">
+              <PropertyRef Name="User_Id" />
+            </Principal>
+            <Dependent Role="Vehicle_Info">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GeneralInsuranceEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" />
+          <EntitySet Name="Claim_Insurance" EntityType="Self.Claim_Insurance" />
+          <EntitySet Name="Depreciation_Percentage" EntityType="Self.Depreciation_Percentage" />
+          <EntitySet Name="Model_od_prem_amt" EntityType="Self.Model_od_prem_amt" />
+          <EntitySet Name="No_Claim_Bonus" EntityType="Self.No_Claim_Bonus" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Policy_Plans" EntityType="Self.Policy_Plans" />
+          <EntitySet Name="Subscription_plan" EntityType="Self.Subscription_plan" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Third_Party_Prem" EntityType="Self.Third_Party_Prem" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" />
+          <EntitySet Name="Vehicle_Info" EntityType="Self.Vehicle_Info" />
+          <AssociationSet Name="FK__Model_od___Brand__2A4B4B5E" Association="Self.FK__Model_od___Brand__2A4B4B5E">
+            <End Role="Brand_Names" EntitySet="Brand_Names" />
+            <End Role="Model_od_prem_amt" EntitySet="Model_od_prem_amt" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Claim_Ins__Polic__412EB0B6" Association="Self.FK__Claim_Ins__Polic__412EB0B6">
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+            <End Role="Claim_Insurance" EntitySet="Claim_Insurance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_I__Model__2E1BDC42" Association="Self.FK__Vehicle_I__Model__2E1BDC42">
+            <End Role="Model_od_prem_amt" EntitySet="Model_od_prem_amt" />
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Policy__3D5E1FD2" Association="Self.FK__Payments__Policy__3D5E1FD2">
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__User_I__3E52440B" Association="Self.FK__Payments__User_I__3E52440B">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Polic__398D8EEE" Association="Self.FK__Subscript__Polic__398D8EEE">
+            <End Role="Policy_Plans" EntitySet="Policy_Plans" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__Reg_N__3A81B327" Association="Self.FK__Subscript__Reg_N__3A81B327">
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subscript__User___38996AB5" Association="Self.FK__Subscript__User___38996AB5">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Subscription_plan" EntitySet="Subscription_plan" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_I__User___2D27B809" Association="Self.FK__Vehicle_I__User___2D27B809">
+            <End Role="User_Registration" EntitySet="User_Registration" />
+            <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GeneralInsuranceModelStoreContainer" CdmEntityContainer="GeneralInsuranceEntities1">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brand_Names">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Brand_Names">
+              <MappingFragment StoreEntitySet="Brand_Names">
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+                <ScalarProperty Name="Brand_Name" ColumnName="Brand_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Claim_Insurance">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Claim_Insurance">
+              <MappingFragment StoreEntitySet="Claim_Insurance">
+                <ScalarProperty Name="Claim_no" ColumnName="Claim_no" />
+                <ScalarProperty Name="Policy_No" ColumnName="Policy_No" />
+                <ScalarProperty Name="Reasons" ColumnName="Reasons" />
+                <ScalarProperty Name="Date_claimed" ColumnName="Date_claimed" />
+                <ScalarProperty Name="Date_of_Loss" ColumnName="Date_of_Loss" />
+                <ScalarProperty Name="Place_of_Loss" ColumnName="Place_of_Loss" />
+                <ScalarProperty Name="Damage_Description" ColumnName="Damage_Description" />
+                <ScalarProperty Name="Injury_to_Thirdparty" ColumnName="Injury_to_Thirdparty" />
+                <ScalarProperty Name="Claim_approval_status" ColumnName="Claim_approval_status" />
+                <ScalarProperty Name="Claim_amt" ColumnName="Claim_amt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Depreciation_Percentage">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Depreciation_Percentage">
+              <MappingFragment StoreEntitySet="Depreciation_Percentage">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Depreciation_percentage1" ColumnName="Depreciation_percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model_od_prem_amt">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Model_od_prem_amt">
+              <MappingFragment StoreEntitySet="Model_od_prem_amt">
+                <ScalarProperty Name="Model_Name" ColumnName="Model_Name" />
+                <ScalarProperty Name="vehicle_type" ColumnName="vehicle_type" />
+                <ScalarProperty Name="Veh_based_od_prem" ColumnName="Veh_based_od_prem" />
+                <ScalarProperty Name="Brand_Id" ColumnName="Brand_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="No_Claim_Bonus">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.No_Claim_Bonus">
+              <MappingFragment StoreEntitySet="No_Claim_Bonus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="No_of_cons_yr_not_claimed" ColumnName="No_of_cons_yr_not_claimed" />
+                <ScalarProperty Name="Discount_percentage" ColumnName="Discount_percentage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Payment_id" ColumnName="Payment_id" />
+                <ScalarProperty Name="Policy_No" ColumnName="Policy_No" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Payment_date" ColumnName="Payment_date" />
+                <ScalarProperty Name="Card_type" ColumnName="Card_type" />
+                <ScalarProperty Name="Card_number" ColumnName="Card_number" />
+                <ScalarProperty Name="Exp_date" ColumnName="Exp_date" />
+                <ScalarProperty Name="Payment_status" ColumnName="Payment_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Policy_Plans">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Policy_Plans">
+              <MappingFragment StoreEntitySet="Policy_Plans">
+                <ScalarProperty Name="Policy_plan_id" ColumnName="Policy_plan_id" />
+                <ScalarProperty Name="Plan_type" ColumnName="Plan_type" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscription_plan">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Subscription_plan">
+              <MappingFragment StoreEntitySet="Subscription_plan">
+                <ScalarProperty Name="Policy_No" ColumnName="Policy_No" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Policy_plan_id" ColumnName="Policy_plan_id" />
+                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
+                <ScalarProperty Name="Sub_date" ColumnName="Sub_date" />
+                <ScalarProperty Name="Status_of_sub" ColumnName="Status_of_sub" />
+                <ScalarProperty Name="Market_price" ColumnName="Market_price" />
+                <ScalarProperty Name="IDV" ColumnName="IDV" />
+                <ScalarProperty Name="Total_tp_prem_amt" ColumnName="Total_tp_prem_amt" />
+                <ScalarProperty Name="Total_od_prem_amt" ColumnName="Total_od_prem_amt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Third_Party_Prem">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Third_Party_Prem">
+              <MappingFragment StoreEntitySet="Third_Party_Prem">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Vehicle_CC_Min" ColumnName="Vehicle_CC_Min" />
+                <ScalarProperty Name="Vehicle_CC_Max" ColumnName="Vehicle_CC_Max" />
+                <ScalarProperty Name="Vehicle_Type" ColumnName="Vehicle_Type" />
+                <ScalarProperty Name="Fixed_TP_Prem" ColumnName="Fixed_TP_Prem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Registration">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.User_Registration">
+              <MappingFragment StoreEntitySet="User_Registration">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicle_Info">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.Vehicle_Info">
+              <MappingFragment StoreEntitySet="Vehicle_Info">
+                <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
+                <ScalarProperty Name="Vehicle_Type" ColumnName="Vehicle_Type" />
+                <ScalarProperty Name="Manufacturer_Name" ColumnName="Manufacturer_Name" />
+                <ScalarProperty Name="Driving_license" ColumnName="Driving_license" />
+                <ScalarProperty Name="Veh_purchase_date" ColumnName="Veh_purchase_date" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="Model_Name" ColumnName="Model_Name" />
+                <ScalarProperty Name="Chasis_No" ColumnName="Chasis_No" />
+                <ScalarProperty Name="Vehicle_CC" ColumnName="Vehicle_CC" />
+                <ScalarProperty Name="Market_price" ColumnName="Market_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

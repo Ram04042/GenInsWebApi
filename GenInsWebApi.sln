@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenInsWebApi", "GenInsWebApi\GenInsWebApi.csproj", "{1AE05477-56EF-4F09-8EEE-E8052F239D03}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenInsWebApi.Tests", "GenInsWebApi.Tests\GenInsWebApi.Tests.csproj", "{A742C66E-89CE-4D1A-931E-F41730E0D755}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AE05477-56EF-4F09-8EEE-E8052F239D03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE05477-56EF-4F09-8EEE-E8052F239D03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE05477-56EF-4F09-8EEE-E8052F239D03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE05477-56EF-4F09-8EEE-E8052F239D03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4967C9DD-7B0C-4C5F-A671-89A2051986DA}
+	EndGlobalSection
+EndGlobal
