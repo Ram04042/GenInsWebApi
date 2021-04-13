@@ -48,7 +48,7 @@
           </Key>
           <Property Name="Model_Name" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="vehicle_type" Type="varchar" MaxLength="20" />
-          <Property Name="Veh_based_od_prem" Type="int" />
+          <Property Name="Veh_based_od_prem" Type="float" />
           <Property Name="Brand_Id" Type="int" />
         </EntityType>
         <EntityType Name="No_Claim_Bonus">
@@ -352,7 +352,7 @@
           </Key>
           <Property Name="Model_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="vehicle_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Veh_based_od_prem" Type="Int32" />
+          <Property Name="Veh_based_od_prem" Type="Double" />
           <Property Name="Brand_Id" Type="Int32" />
           <NavigationProperty Name="Brand_Names" Relationship="Self.FK__Model_od___Brand__2A4B4B5E" FromRole="Model_od_prem_amt" ToRole="Brand_Names" />
           <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Vehicle_I__Model__2E1BDC42" FromRole="Model_od_prem_amt" ToRole="Vehicle_Info" />
@@ -571,7 +571,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GeneralInsuranceEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GeneralInsuranceEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" />
           <EntitySet Name="Claim_Insurance" EntityType="Self.Claim_Insurance" />
@@ -627,7 +627,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GeneralInsuranceModelStoreContainer" CdmEntityContainer="GeneralInsuranceEntities1">
+        <EntityContainerMapping StorageEntityContainer="GeneralInsuranceModelStoreContainer" CdmEntityContainer="GeneralInsuranceEntities2">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="GeneralInsuranceModel.Admin">
               <MappingFragment StoreEntitySet="Admin">

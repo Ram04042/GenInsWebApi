@@ -22,7 +22,7 @@ namespace GenInsWebApi.Models
     
         public string Model_Name { get; set; }
         public string vehicle_type { get; set; }
-        public Nullable<int> Veh_based_od_prem { get; set; }
+        public Nullable<double> Veh_based_od_prem { get; set; }
         public Nullable<int> Brand_Id { get; set; }
     
         public virtual Brand_Names Brand_Names { get; set; }

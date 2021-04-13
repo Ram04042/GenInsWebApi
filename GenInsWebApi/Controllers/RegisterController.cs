@@ -10,7 +10,7 @@ namespace GenInsWebApi.Controllers
 {
     public class RegisterController : ApiController
     {
-        GeneralInsuranceEntities1 db = new GeneralInsuranceEntities1();
+        GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
 
         public IHttpActionResult Register(User_Registration user)
         {

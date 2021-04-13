@@ -10,7 +10,7 @@ namespace GenInsWebApi.Controllers
 {
     public class LoginController : ApiController
     {
-        GeneralInsuranceEntities1 db = new GeneralInsuranceEntities1();
+        GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
         public object login(LoginApiClass l)
         {
             var res = db.User_Registration
