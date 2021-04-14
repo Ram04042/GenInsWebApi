@@ -13,10 +13,10 @@ namespace GenInsWebApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GeneralInsuranceEntities1 : DbContext
+    public partial class GeneralInsuranceEntities2 : DbContext
     {
-        public GeneralInsuranceEntities1()
-            : base("name=GeneralInsuranceEntities1")
+        public GeneralInsuranceEntities2()
+            : base("name=GeneralInsuranceEntities2")
         {
         }
     
