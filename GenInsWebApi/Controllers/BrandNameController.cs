@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace GenInsWebApi.Controllers
 {
-    public class RamBuyCheckController : ApiController
+    public class BrandNameController : ApiController
     {
         GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
 
@@ -29,9 +29,6 @@ namespace GenInsWebApi.Controllers
             return Ok(res);
 
         }
-
-
-        
 
     }
 

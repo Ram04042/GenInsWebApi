@@ -30,7 +30,7 @@ namespace GenInsWebApi
             //.Add(new MediaTypeHeaderValue("text/html"));
 
             // we can do the above to change it to json or we can clear the xml formatter so that it will take the json format
-            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            //config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 
             // reverse for xml format
             // config.Formatters.Remove(config.Formatters.XmlFormatter);
