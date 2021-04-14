@@ -12,6 +12,7 @@ namespace GenInsWebApi.Controllers
 {
     public class RegisterController : ApiController
     {
+
         string key = "1prt56";
 
         GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
@@ -63,6 +64,7 @@ namespace GenInsWebApi.Controllers
             objt.Clear();
             return Convert.ToBase64String(resArray, 0, resArray.Length);
         }
+
 
     }
 }
