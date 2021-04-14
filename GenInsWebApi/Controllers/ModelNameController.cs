@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace GenInsWebApi.Controllers
 {
-    public class RamBuyCheck2Controller : ApiController
+    public class ModelNameController : ApiController
     {
         GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
         [HttpPost]

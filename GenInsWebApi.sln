@@ -15,11 +15,15 @@ Global
 		{622520CD-5482-444C-8007-E7D34D0A98F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{622520CD-5482-444C-8007-E7D34D0A98F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{622520CD-5482-444C-8007-E7D34D0A98F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A742C66E-89CE-4D1A-931E-F41730E0D755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
+		SolutionGuid = {7E64A093-F735-426E-BF2A-DA28FABDE33A}
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {7E64A093-F735-426E-BF2A-DA28FABDE33A}
+		SolutionGuid = {F9B661C2-7CC1-474A-B9AD-A4601CB7B268}
 	EndGlobalSection
 EndGlobal
