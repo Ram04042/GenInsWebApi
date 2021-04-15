@@ -10,7 +10,7 @@ namespace GenInsWebApi.Controllers
 {
     public class BrandNameController : ApiController
     {
-        GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
+        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
 
         [HttpPost]
         public object getBrands(vehTypeApiClass va)

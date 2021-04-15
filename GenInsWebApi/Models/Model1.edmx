@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GeneralInsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GeneralInsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Admin_id" />
@@ -41,6 +41,14 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Age" Type="int" />
           <Property Name="Depreciation_percentage" Type="int" />
+        </EntityType>
+        <EntityType Name="forgot_password">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_id" Type="varchar" MaxLength="50" />
+          <Property Name="encryted_link" Type="varchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="Model_od_prem_amt">
           <Key>
@@ -95,16 +103,6 @@
           <Property Name="IDV" Type="money" />
           <Property Name="Total_tp_prem_amt" Type="money" />
           <Property Name="Total_od_prem_amt" Type="money" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -256,12 +254,12 @@
           <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Claim_Insurance" EntityType="Self.Claim_Insurance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Depreciation_Percentage" EntityType="Self.Depreciation_Percentage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="forgot_password" EntityType="Self.forgot_password" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model_od_prem_amt" EntityType="Self.Model_od_prem_amt" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="No_Claim_Bonus" EntityType="Self.No_Claim_Bonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Policy_Plans" EntityType="Self.Policy_Plans" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscription_plan" EntityType="Self.Subscription_plan" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Third_Party_Prem" EntityType="Self.Third_Party_Prem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Registration" EntityType="Self.User_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle_Info" EntityType="Self.Vehicle_Info" Schema="dbo" store:Type="Tables" />
@@ -302,8 +300,7 @@
             <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GeneralInsuranceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -409,16 +406,6 @@
           <NavigationProperty Name="Policy_Plans" Relationship="Self.FK__Subscript__Polic__398D8EEE" FromRole="Subscription_plan" ToRole="Policy_Plans" />
           <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Subscript__Reg_N__3A81B327" FromRole="Subscription_plan" ToRole="Vehicle_Info" />
           <NavigationProperty Name="User_Registration" Relationship="Self.FK__Subscript__User___38996AB5" FromRole="Subscription_plan" ToRole="User_Registration" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -571,7 +558,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="GeneralInsuranceEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="GeneralInsuranceEntities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admins" EntityType="Self.Admin" />
           <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" />
           <EntitySet Name="Claim_Insurance" EntityType="Self.Claim_Insurance" />
@@ -581,7 +568,6 @@
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Policy_Plans" EntityType="Self.Policy_Plans" />
           <EntitySet Name="Subscription_plan" EntityType="Self.Subscription_plan" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Third_Party_Prem" EntityType="Self.Third_Party_Prem" />
           <EntitySet Name="User_Registration" EntityType="Self.User_Registration" />
           <EntitySet Name="Vehicle_Info" EntityType="Self.Vehicle_Info" />
@@ -621,13 +607,22 @@
             <End Role="User_Registration" EntitySet="User_Registration" />
             <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
           </AssociationSet>
+          <EntitySet Name="forgot_password" EntityType="GeneralInsuranceModel.forgot_password" />
         </EntityContainer>
+        <EntityType Name="forgot_password">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="encryted_link" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="GeneralInsuranceModelStoreContainer" CdmEntityContainer="GeneralInsuranceEntities2">
+        <EntityContainerMapping StorageEntityContainer="GeneralInsuranceModelStoreContainer" CdmEntityContainer="GeneralInsuranceEntities3">
           <EntitySetMapping Name="Admins">
             <EntityTypeMapping TypeName="GeneralInsuranceModel.Admin">
               <MappingFragment StoreEntitySet="Admin">
@@ -728,17 +723,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="GeneralInsuranceModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Third_Party_Prem">
             <EntityTypeMapping TypeName="GeneralInsuranceModel.Third_Party_Prem">
               <MappingFragment StoreEntitySet="Third_Party_Prem">
@@ -776,6 +760,15 @@
                 <ScalarProperty Name="Chasis_No" ColumnName="Chasis_No" />
                 <ScalarProperty Name="Vehicle_CC" ColumnName="Vehicle_CC" />
                 <ScalarProperty Name="Market_price" ColumnName="Market_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="forgot_password">
+            <EntityTypeMapping TypeName="GeneralInsuranceModel.forgot_password">
+              <MappingFragment StoreEntitySet="forgot_password">
+                <ScalarProperty Name="encryted_link" ColumnName="encryted_link" />
+                <ScalarProperty Name="Email_id" ColumnName="Email_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

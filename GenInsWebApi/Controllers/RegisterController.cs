@@ -15,7 +15,7 @@ namespace GenInsWebApi.Controllers
 
         string key = "1prt56";
 
-        GeneralInsuranceEntities2 db = new GeneralInsuranceEntities2();
+        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
 
         public HttpResponseMessage Register(User_Registration user)
         {

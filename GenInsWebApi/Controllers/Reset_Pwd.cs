@@ -5,10 +5,12 @@ using System.Web;
 
 namespace GenInsWebApi.Models
 {
-    public class LoginApiClass
+    public class Reset_Pwd
     {
-        public string Email_ID { get; set; }
-        public string Password { get; set; }
+        public string token { get; set; }
+
+        public string password { get; set; }
+
         public string message { get; set; }
     }
 }
