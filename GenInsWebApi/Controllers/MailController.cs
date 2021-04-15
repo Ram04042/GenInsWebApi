@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web;
 using System.Web.Http;
 using GenInsWebApi.Models;
 
@@ -31,7 +32,7 @@ namespace GenInsWebApi.Controllers
                 string from = "raidinsurance@gmail.com"; //example:- sourabh9303@gmail.com  
                 using (MailMessage mail = new MailMessage(from, objMail.Email_ID))
                 {
-                    var url = "http://localhost:4200/ForgetPwd/?token=" + Encryptword(objMail.Email_ID);
+                    var url = "http://localhost:4200/ForgetPwd/?token=" + HttpUtility.UrlEncode(Encryptword(objMail.Email_ID));
                     forget_pwd.Email_id = objMail.Email_ID;
                     forget_pwd.encryted_link = url;
                     db.forgot_password.Add(forget_pwd);
