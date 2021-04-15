@@ -169,8 +169,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\forgot_pwdController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\Mail.cs" />
+    <Compile Include="Controllers\MailController.cs" />
     <Compile Include="Controllers\ModelNameController.cs" />
     <Compile Include="Controllers\BrandNameController.cs" />
     <Compile Include="Controllers\PremiumAmountController.cs" />
@@ -189,6 +192,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Depreciation_Percentage.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\forgot_password.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginApiClass.cs" />
@@ -219,10 +225,9 @@
     <Compile Include="Models\Policy_Plans.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\Reset_Pwd.cs" />
+    <Compile Include="Controllers\Reset_pwdController.cs" />
     <Compile Include="Models\Subscription_plan.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Third_Party_Prem.cs">
@@ -306,6 +311,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ForgotPwd\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
