@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="Claim_no" />
           </Key>
-          <Property Name="Claim_no" Type="int" Nullable="false" />
+          <Property Name="Claim_no" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Policy_No" Type="varchar" MaxLength="10" />
           <Property Name="Reasons" Type="varchar" MaxLength="50" />
           <Property Name="Date_claimed" Type="date" />
@@ -39,7 +39,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="Age" Type="int" />
+          <Property Name="Age" Type="float" />
           <Property Name="Depreciation_percentage" Type="int" />
         </EntityType>
         <EntityType Name="forgot_password">
@@ -86,7 +86,7 @@
             <PropertyRef Name="Policy_plan_id" />
           </Key>
           <Property Name="Policy_plan_id" Type="int" Nullable="false" />
-          <Property Name="Plan_type" Type="varchar" MaxLength="10" />
+          <Property Name="Plan_type" Type="varchar" MaxLength="20" />
           <Property Name="Duration" Type="int" />
         </EntityType>
         <EntityType Name="Subscription_plan">
@@ -140,8 +140,9 @@
           <Property Name="Chasis_No" Type="int" />
           <Property Name="Vehicle_CC" Type="int" />
           <Property Name="Market_price" Type="money" />
+          <Property Name="Engine_No" Type="int" />
         </EntityType>
-        <Association Name="FK__Claim_Ins__Polic__412EB0B6">
+        <Association Name="FK__Claim_Ins__Polic__4F7CD00D">
           <End Role="Subscription_plan" Type="Self.Subscription_plan" Multiplicity="0..1" />
           <End Role="Claim_Insurance" Type="Self.Claim_Insurance" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,7 +264,7 @@
           <EntitySet Name="Third_Party_Prem" EntityType="Self.Third_Party_Prem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Registration" EntityType="Self.User_Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vehicle_Info" EntityType="Self.Vehicle_Info" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Claim_Ins__Polic__412EB0B6" Association="Self.FK__Claim_Ins__Polic__412EB0B6">
+          <AssociationSet Name="FK__Claim_Ins__Polic__4F7CD00D" Association="Self.FK__Claim_Ins__Polic__4F7CD00D">
             <End Role="Subscription_plan" EntitySet="Subscription_plan" />
             <End Role="Claim_Insurance" EntitySet="Claim_Insurance" />
           </AssociationSet>
@@ -383,7 +384,7 @@
             <PropertyRef Name="Policy_plan_id" />
           </Key>
           <Property Name="Policy_plan_id" Type="Int32" Nullable="false" />
-          <Property Name="Plan_type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Plan_type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Duration" Type="Int32" />
           <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Subscript__Polic__398D8EEE" FromRole="Policy_Plans" ToRole="Subscription_plan" />
         </EntityType>
@@ -449,6 +450,7 @@
           <NavigationProperty Name="Model_od_prem_amt" Relationship="Self.FK__Vehicle_I__Model__2E1BDC42" FromRole="Vehicle_Info" ToRole="Model_od_prem_amt" />
           <NavigationProperty Name="Subscription_plan" Relationship="Self.FK__Subscript__Reg_N__3A81B327" FromRole="Vehicle_Info" ToRole="Subscription_plan" />
           <NavigationProperty Name="User_Registration" Relationship="Self.FK__Vehicle_I__User___2D27B809" FromRole="Vehicle_Info" ToRole="User_Registration" />
+          <Property Name="Engine_No" Type="Int32" />
         </EntityType>
         <Association Name="FK__Model_od___Brand__2A4B4B5E">
           <End Role="Brand_Names" Type="Self.Brand_Names" Multiplicity="0..1" />
@@ -750,6 +752,7 @@
           <EntitySetMapping Name="Vehicle_Info">
             <EntityTypeMapping TypeName="GeneralInsuranceModel.Vehicle_Info">
               <MappingFragment StoreEntitySet="Vehicle_Info">
+                <ScalarProperty Name="Engine_No" ColumnName="Engine_No" />
                 <ScalarProperty Name="Reg_No" ColumnName="Reg_No" />
                 <ScalarProperty Name="Vehicle_Type" ColumnName="Vehicle_Type" />
                 <ScalarProperty Name="Manufacturer_Name" ColumnName="Manufacturer_Name" />
