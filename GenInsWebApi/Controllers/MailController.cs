@@ -15,7 +15,7 @@ namespace GenInsWebApi.Controllers
     public class MailController : ApiController
     {
         string key = "1prt56";
-        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
+        General_InsuranceEntities db = new General_InsuranceEntities();
         
         User_Registration user = new User_Registration();
 

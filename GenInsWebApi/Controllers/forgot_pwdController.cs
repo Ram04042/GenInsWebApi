@@ -13,7 +13,7 @@ namespace GenInsWebApi.Controllers
 
     public class forgot_pwdController : ApiController
     {
-        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
+        General_InsuranceEntities db = new General_InsuranceEntities();
 
         User_Registration user = new User_Registration();
 

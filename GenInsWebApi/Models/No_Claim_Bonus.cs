@@ -16,6 +16,6 @@ namespace GenInsWebApi.Models
     {
         public int id { get; set; }
         public Nullable<int> No_of_cons_yr_not_claimed { get; set; }
-        public Nullable<int> Discount_percentage { get; set; }
+        public Nullable<double> Discount_percentage { get; set; }
     }
 }
