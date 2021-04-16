@@ -16,6 +16,6 @@ namespace GenInsWebApi.Models
     {
         public int id { get; set; }
         public Nullable<int> Age { get; set; }
-        public Nullable<int> Depreciation_percentage1 { get; set; }
+        public Nullable<double> Depreciation_percentage1 { get; set; }
     }
 }
