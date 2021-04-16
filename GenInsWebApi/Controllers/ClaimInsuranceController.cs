@@ -14,6 +14,7 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult Claim(Claim_Insurance claim)
         {
+            claim.Claim_approval_status = "Pending";
             db.Claim_Insurance.Add(claim);
             db.SaveChanges();
             return Ok();
