@@ -21,7 +21,7 @@ namespace GenInsWebApi.Models
             this.Payments = new HashSet<Payment>();
         }
     
-        public string Policy_No { get; set; }
+        public int Policy_No { get; set; }
         public Nullable<int> User_Id { get; set; }
         public Nullable<int> Policy_plan_id { get; set; }
         public string Reg_No { get; set; }
@@ -31,6 +31,7 @@ namespace GenInsWebApi.Models
         public Nullable<decimal> IDV { get; set; }
         public Nullable<decimal> Total_tp_prem_amt { get; set; }
         public Nullable<decimal> Total_od_prem_amt { get; set; }
+        public Nullable<decimal> Total_Payable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Claim_Insurance> Claim_Insurance { get; set; }
