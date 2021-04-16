@@ -30,6 +30,7 @@ namespace GenInsWebApi.Models
         public Nullable<int> Chasis_No { get; set; }
         public Nullable<int> Vehicle_CC { get; set; }
         public Nullable<decimal> Market_price { get; set; }
+        public Nullable<int> Engine_No { get; set; }
     
         public virtual Model_od_prem_amt Model_od_prem_amt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
