@@ -18,5 +18,13 @@ namespace GenInsWebApi.Controllers
             db.SaveChanges();
             return Ok();
         }
+
+        public IHttpActionResult GetClaims()
+        {
+            var res = db.Claim_Insurance.Find(1001);
+            return Ok(res);
+        }
+
+
     }
 }
