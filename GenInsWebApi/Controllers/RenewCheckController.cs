@@ -22,6 +22,11 @@ namespace GenInsWebApi.Controllers
                                                 x.User_Id == ra.User_Id)
                         .Select(x => new renewCheckResponse()
                         {
+                            brand_name = x.Vehicle_Info.Manufacturer_Name,
+                            registeration_number = x.Vehicle_Info.Reg_No,
+                            license_no = x.Vehicle_Info.Driving_license,
+                            engine_number = x.Vehicle_Info.Engine_No,
+                            chassis_number = x.Vehicle_Info.Chasis_No,
                             model_name = x.Vehicle_Info.Model_Name,
                             vehicleCC = x.Vehicle_Info.Vehicle_CC,
                             veh_type = x.Vehicle_Info.Vehicle_Type,
@@ -59,6 +64,11 @@ namespace GenInsWebApi.Controllers
 
     public class renewCheckResponse
     {
+        public int? chassis_number { get; set; }
+        public int? engine_number { get; set; }
+        public string license_no { get; set; }
+        public string registeration_number { get; set; }
+        public string brand_name { get; set; }
         public string message { get; set; }
         public string subscription_status { get; set; }
 

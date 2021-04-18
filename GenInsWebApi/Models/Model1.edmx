@@ -105,6 +105,7 @@
           <Property Name="Total_tp_prem_amt" Type="money" />
           <Property Name="Total_od_prem_amt" Type="money" />
           <Property Name="Total_Payable" Type="money" />
+          <Property Name="End_date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -459,6 +460,7 @@
           <NavigationProperty Name="Policy_Plans" Relationship="Self.FK__Subscript__Polic__38996AB5" FromRole="Subscription_plan" ToRole="Policy_Plans" />
           <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Subscript__Reg_N__398D8EEE" FromRole="Subscription_plan" ToRole="Vehicle_Info" />
           <NavigationProperty Name="User_Registration" Relationship="Self.FK__Subscript__User___37A5467C" FromRole="Subscription_plan" ToRole="User_Registration" />
+          <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -806,6 +808,7 @@
           <EntitySetMapping Name="Subscription_plan">
             <EntityTypeMapping TypeName="General_InsuranceModel.Subscription_plan">
               <MappingFragment StoreEntitySet="Subscription_plan">
+                <ScalarProperty Name="End_date" ColumnName="End_date" />
                 <ScalarProperty Name="Policy_No" ColumnName="Policy_No" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Policy_plan_id" ColumnName="Policy_plan_id" />
