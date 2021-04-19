@@ -32,6 +32,7 @@ namespace GenInsWebApi.Models
         public Nullable<decimal> Total_tp_prem_amt { get; set; }
         public Nullable<decimal> Total_od_prem_amt { get; set; }
         public Nullable<decimal> Total_Payable { get; set; }
+        public System.DateTime End_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Claim_Insurance> Claim_Insurance { get; set; }

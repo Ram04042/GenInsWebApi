@@ -168,6 +168,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BuyInsuranceCheckController.cs" />
+    <Compile Include="Controllers\BuyInsuranceController.cs" />
     <Compile Include="Controllers\Admin.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ClaimHistoryController.cs" />
@@ -181,6 +183,8 @@
     <Compile Include="Controllers\BrandNameController.cs" />
     <Compile Include="Controllers\PremiumAmountController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\RenewCheckController.cs" />
+    <Compile Include="Controllers\RenewInsuranceController.cs" />
     <Compile Include="Controllers\SubscriptionController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -192,6 +196,7 @@
     <Compile Include="Models\Brand_Names.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuyInsuranceApi.cs" />
     <Compile Include="Models\Claim_Insurance.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -231,6 +236,7 @@
     <Compile Include="Models\Policy_Plans.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RenewInsuranceApi.cs" />
     <Compile Include="Models\Subscription_plan.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -316,6 +322,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ForgotPwd\" />
+    <Folder Include="Views\test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

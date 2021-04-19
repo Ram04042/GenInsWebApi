@@ -12,6 +12,8 @@ namespace GenInsWebApi.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class General_InsuranceEntities : DbContext
     {
@@ -38,5 +40,151 @@ namespace GenInsWebApi.Models
         public virtual DbSet<Third_Party_Prem> Third_Party_Prem { get; set; }
         public virtual DbSet<User_Registration> User_Registration { get; set; }
         public virtual DbSet<Vehicle_Info> Vehicle_Info { get; set; }
+    
+        public virtual int add_user_sub(string reg_no, string vehicle_type, Nullable<decimal> brand_id, string driving_license, Nullable<System.DateTime> veh_purchase_date, Nullable<decimal> user_id, string model_name, Nullable<decimal> chasis_no, Nullable<decimal> vehicle_cc, Nullable<decimal> market_price, Nullable<decimal> engine_no, string plan_type, Nullable<decimal> plan_duration, Nullable<decimal> idv, Nullable<decimal> total_tp_prem_amt, Nullable<decimal> total_od_prem_amt, Nullable<decimal> total_payable, string card_holder_name, Nullable<decimal> card_number, Nullable<decimal> exp_month, Nullable<decimal> exp_year, ObjectParameter message)
+        {
+            var reg_noParameter = reg_no != null ?
+                new ObjectParameter("reg_no", reg_no) :
+                new ObjectParameter("reg_no", typeof(string));
+    
+            var vehicle_typeParameter = vehicle_type != null ?
+                new ObjectParameter("vehicle_type", vehicle_type) :
+                new ObjectParameter("vehicle_type", typeof(string));
+    
+            var brand_idParameter = brand_id.HasValue ?
+                new ObjectParameter("brand_id", brand_id) :
+                new ObjectParameter("brand_id", typeof(decimal));
+    
+            var driving_licenseParameter = driving_license != null ?
+                new ObjectParameter("driving_license", driving_license) :
+                new ObjectParameter("driving_license", typeof(string));
+    
+            var veh_purchase_dateParameter = veh_purchase_date.HasValue ?
+                new ObjectParameter("veh_purchase_date", veh_purchase_date) :
+                new ObjectParameter("veh_purchase_date", typeof(System.DateTime));
+    
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(decimal));
+    
+            var model_nameParameter = model_name != null ?
+                new ObjectParameter("model_name", model_name) :
+                new ObjectParameter("model_name", typeof(string));
+    
+            var chasis_noParameter = chasis_no.HasValue ?
+                new ObjectParameter("chasis_no", chasis_no) :
+                new ObjectParameter("chasis_no", typeof(decimal));
+    
+            var vehicle_ccParameter = vehicle_cc.HasValue ?
+                new ObjectParameter("vehicle_cc", vehicle_cc) :
+                new ObjectParameter("vehicle_cc", typeof(decimal));
+    
+            var market_priceParameter = market_price.HasValue ?
+                new ObjectParameter("market_price", market_price) :
+                new ObjectParameter("market_price", typeof(decimal));
+    
+            var engine_noParameter = engine_no.HasValue ?
+                new ObjectParameter("engine_no", engine_no) :
+                new ObjectParameter("engine_no", typeof(decimal));
+    
+            var plan_typeParameter = plan_type != null ?
+                new ObjectParameter("plan_type", plan_type) :
+                new ObjectParameter("plan_type", typeof(string));
+    
+            var plan_durationParameter = plan_duration.HasValue ?
+                new ObjectParameter("plan_duration", plan_duration) :
+                new ObjectParameter("plan_duration", typeof(decimal));
+    
+            var idvParameter = idv.HasValue ?
+                new ObjectParameter("idv", idv) :
+                new ObjectParameter("idv", typeof(decimal));
+    
+            var total_tp_prem_amtParameter = total_tp_prem_amt.HasValue ?
+                new ObjectParameter("total_tp_prem_amt", total_tp_prem_amt) :
+                new ObjectParameter("total_tp_prem_amt", typeof(decimal));
+    
+            var total_od_prem_amtParameter = total_od_prem_amt.HasValue ?
+                new ObjectParameter("total_od_prem_amt", total_od_prem_amt) :
+                new ObjectParameter("total_od_prem_amt", typeof(decimal));
+    
+            var total_payableParameter = total_payable.HasValue ?
+                new ObjectParameter("total_payable", total_payable) :
+                new ObjectParameter("total_payable", typeof(decimal));
+    
+            var card_holder_nameParameter = card_holder_name != null ?
+                new ObjectParameter("card_holder_name", card_holder_name) :
+                new ObjectParameter("card_holder_name", typeof(string));
+    
+            var card_numberParameter = card_number.HasValue ?
+                new ObjectParameter("card_number", card_number) :
+                new ObjectParameter("card_number", typeof(decimal));
+    
+            var exp_monthParameter = exp_month.HasValue ?
+                new ObjectParameter("exp_month", exp_month) :
+                new ObjectParameter("exp_month", typeof(decimal));
+    
+            var exp_yearParameter = exp_year.HasValue ?
+                new ObjectParameter("exp_year", exp_year) :
+                new ObjectParameter("exp_year", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("add_user_sub", reg_noParameter, vehicle_typeParameter, brand_idParameter, driving_licenseParameter, veh_purchase_dateParameter, user_idParameter, model_nameParameter, chasis_noParameter, vehicle_ccParameter, market_priceParameter, engine_noParameter, plan_typeParameter, plan_durationParameter, idvParameter, total_tp_prem_amtParameter, total_od_prem_amtParameter, total_payableParameter, card_holder_nameParameter, card_numberParameter, exp_monthParameter, exp_yearParameter, message);
+        }
+    
+        public virtual int renew_policy(Nullable<decimal> user_id, Nullable<decimal> policy_no, Nullable<decimal> market_price, string plan_type, Nullable<decimal> plan_duration, Nullable<decimal> idv, Nullable<decimal> total_tp_prem_amt, Nullable<decimal> total_od_prem_amt, Nullable<decimal> total_payable, string card_holder_name, Nullable<decimal> card_number, Nullable<decimal> exp_month, Nullable<decimal> exp_year, ObjectParameter message)
+        {
+            var user_idParameter = user_id.HasValue ?
+                new ObjectParameter("user_id", user_id) :
+                new ObjectParameter("user_id", typeof(decimal));
+    
+            var policy_noParameter = policy_no.HasValue ?
+                new ObjectParameter("policy_no", policy_no) :
+                new ObjectParameter("policy_no", typeof(decimal));
+    
+            var market_priceParameter = market_price.HasValue ?
+                new ObjectParameter("market_price", market_price) :
+                new ObjectParameter("market_price", typeof(decimal));
+    
+            var plan_typeParameter = plan_type != null ?
+                new ObjectParameter("plan_type", plan_type) :
+                new ObjectParameter("plan_type", typeof(string));
+    
+            var plan_durationParameter = plan_duration.HasValue ?
+                new ObjectParameter("plan_duration", plan_duration) :
+                new ObjectParameter("plan_duration", typeof(decimal));
+    
+            var idvParameter = idv.HasValue ?
+                new ObjectParameter("idv", idv) :
+                new ObjectParameter("idv", typeof(decimal));
+    
+            var total_tp_prem_amtParameter = total_tp_prem_amt.HasValue ?
+                new ObjectParameter("total_tp_prem_amt", total_tp_prem_amt) :
+                new ObjectParameter("total_tp_prem_amt", typeof(decimal));
+    
+            var total_od_prem_amtParameter = total_od_prem_amt.HasValue ?
+                new ObjectParameter("total_od_prem_amt", total_od_prem_amt) :
+                new ObjectParameter("total_od_prem_amt", typeof(decimal));
+    
+            var total_payableParameter = total_payable.HasValue ?
+                new ObjectParameter("total_payable", total_payable) :
+                new ObjectParameter("total_payable", typeof(decimal));
+    
+            var card_holder_nameParameter = card_holder_name != null ?
+                new ObjectParameter("card_holder_name", card_holder_name) :
+                new ObjectParameter("card_holder_name", typeof(string));
+    
+            var card_numberParameter = card_number.HasValue ?
+                new ObjectParameter("card_number", card_number) :
+                new ObjectParameter("card_number", typeof(decimal));
+    
+            var exp_monthParameter = exp_month.HasValue ?
+                new ObjectParameter("exp_month", exp_month) :
+                new ObjectParameter("exp_month", typeof(decimal));
+    
+            var exp_yearParameter = exp_year.HasValue ?
+                new ObjectParameter("exp_year", exp_year) :
+                new ObjectParameter("exp_year", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("renew_policy", user_idParameter, policy_noParameter, market_priceParameter, plan_typeParameter, plan_durationParameter, idvParameter, total_tp_prem_amtParameter, total_od_prem_amtParameter, total_payableParameter, card_holder_nameParameter, card_numberParameter, exp_monthParameter, exp_yearParameter, message);
+        }
     }
 }
