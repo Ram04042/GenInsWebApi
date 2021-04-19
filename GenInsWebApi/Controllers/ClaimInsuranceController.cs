@@ -14,10 +14,21 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult Claim(Claim_Insurance claim)
         {
-            claim.Claim_approval_status = "Pending";
-            db.Claim_Insurance.Add(claim);
-            db.SaveChanges();
-            return Ok();
+            bool PlanExists = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub=="active");
+            if(PlanExists == true)
+            {
+                claim.Claim_approval_status = "Pending";
+                db.Claim_Insurance.Add(claim);
+                db.SaveChanges();
+                claim.message = "Successfull";
+                return Ok(claim);
+            }
+            else
+            {
+                claim.message = "Invalid";
+                return Ok(claim);
+            }
         }
+        
     }
 }
