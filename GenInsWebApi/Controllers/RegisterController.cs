@@ -20,24 +20,15 @@ namespace GenInsWebApi.Controllers
         public HttpResponseMessage Register(User_Registration user)
         {
             bool EmailAlreadyExists = db.User_Registration.Any(x => x.Email_ID == user.Email_ID);
-            bool PhoneNoAlreadyExists = db.User_Registration.Any(x => x.Phone_No == user.Phone_No);
 
             if (ModelState.IsValid && EmailAlreadyExists != true)
             {
-                if (PhoneNoAlreadyExists != true)
-                {
-                    user.Email_ID = user.Email_ID;
-                    user.Password = Encryptword(user.Password);
-                    db.User_Registration.Add(user);
-                    db.SaveChanges();
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);
-                    return response;
-                }
-                else
-                {
-                    HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Phone Number Already Exists");
-                    return response;
-                }
+                user.Email_ID = user.Email_ID;
+                user.Password = Encryptword(user.Password);
+                db.User_Registration.Add(user);
+                db.SaveChanges();
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created, user);
+                return response;
             }
             else
             {

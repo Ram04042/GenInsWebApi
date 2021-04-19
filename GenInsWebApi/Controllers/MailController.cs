@@ -38,7 +38,7 @@ namespace GenInsWebApi.Controllers
                     db.forgot_password.Add(forget_pwd);
                     db.SaveChanges();
                     mail.Subject = "Reset Password Link";
-                    mail.Body = url;
+                    mail.Body = "Hello!\nWe received a request to reset the password for your account.\nIf you made this request, click the link given below. If you didn't make this request, you can ignore this email.\n" + url;
                     //if (fileUploader != null)
                     //{
                     //    string fileName = Path.GetFileName(fileUploader.FileName);
