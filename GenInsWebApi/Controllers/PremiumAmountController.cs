@@ -12,7 +12,7 @@ namespace GenInsWebApi.Controllers
 {
     public class PremiumAmountController : ApiController
     {
-        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
+        General_InsuranceEntities db = new General_InsuranceEntities();
 
         [HttpPost]
         public object getpremimum(premapiclass pc)

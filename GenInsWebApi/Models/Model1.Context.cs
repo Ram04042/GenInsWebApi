@@ -13,10 +13,10 @@ namespace GenInsWebApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class GeneralInsuranceEntities3 : DbContext
+    public partial class General_InsuranceEntities : DbContext
     {
-        public GeneralInsuranceEntities3()
-            : base("name=GeneralInsuranceEntities3")
+        public General_InsuranceEntities()
+            : base("name=General_InsuranceEntities")
         {
         }
     
@@ -29,6 +29,7 @@ namespace GenInsWebApi.Models
         public virtual DbSet<Brand_Names> Brand_Names { get; set; }
         public virtual DbSet<Claim_Insurance> Claim_Insurance { get; set; }
         public virtual DbSet<Depreciation_Percentage> Depreciation_Percentage { get; set; }
+        public virtual DbSet<forgot_password> forgot_password { get; set; }
         public virtual DbSet<Model_od_prem_amt> Model_od_prem_amt { get; set; }
         public virtual DbSet<No_Claim_Bonus> No_Claim_Bonus { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
@@ -37,6 +38,5 @@ namespace GenInsWebApi.Models
         public virtual DbSet<Third_Party_Prem> Third_Party_Prem { get; set; }
         public virtual DbSet<User_Registration> User_Registration { get; set; }
         public virtual DbSet<Vehicle_Info> Vehicle_Info { get; set; }
-        public virtual DbSet<forgot_password> forgot_password { get; set; }
     }
 }

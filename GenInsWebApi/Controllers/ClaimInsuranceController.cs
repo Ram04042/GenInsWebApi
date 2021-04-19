@@ -10,13 +10,18 @@ namespace GenInsWebApi.Controllers
 {
     public class ClaimInsuranceController : ApiController
     {
-        GeneralInsuranceEntities3 db = new GeneralInsuranceEntities3();
+        General_InsuranceEntities db = new General_InsuranceEntities();
 
         public IHttpActionResult Claim(Claim_Insurance claim)
         {
             db.Claim_Insurance.Add(claim);
             db.SaveChanges();
             return Ok();
+        }
+        public IHttpActionResult GetClaims()
+        {
+            var claims = db.Claim_Insurance.ToList();
+            return Ok(claims);
         }
     }
 }

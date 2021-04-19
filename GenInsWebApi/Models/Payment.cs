@@ -15,13 +15,14 @@ namespace GenInsWebApi.Models
     public partial class Payment
     {
         public int Payment_id { get; set; }
-        public string Policy_No { get; set; }
+        public Nullable<int> Policy_No { get; set; }
         public Nullable<int> User_Id { get; set; }
         public Nullable<int> Amount { get; set; }
         public Nullable<System.DateTime> Payment_date { get; set; }
-        public string Card_type { get; set; }
-        public Nullable<int> Card_number { get; set; }
-        public Nullable<System.DateTime> Exp_date { get; set; }
+        public string Card_holder_name { get; set; }
+        public Nullable<long> Card_number { get; set; }
+        public Nullable<int> Exp_Month { get; set; }
+        public Nullable<int> Exp_year { get; set; }
         public string Payment_status { get; set; }
     
         public virtual Subscription_plan Subscription_plan { get; set; }
