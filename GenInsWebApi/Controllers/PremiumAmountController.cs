@@ -56,7 +56,7 @@ namespace GenInsWebApi.Controllers
 
         public int? thirdpartyprem { get; set; }
 
-        public float? dep_per { get; set; }
+        public double? dep_per { get; set; }
 
     }
 

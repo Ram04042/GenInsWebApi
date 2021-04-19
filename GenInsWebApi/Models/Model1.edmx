@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="General_InsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="General_InsuranceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Admin">
           <Key>
             <PropertyRef Name="Admin_id" />
@@ -105,6 +105,7 @@
           <Property Name="Total_tp_prem_amt" Type="money" />
           <Property Name="Total_od_prem_amt" Type="money" />
           <Property Name="Total_Payable" Type="money" />
+          <Property Name="End_date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -252,6 +253,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="add_user_sub" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="reg_no" Type="varchar" Mode="In" />
+          <Parameter Name="vehicle_type" Type="varchar" Mode="In" />
+          <Parameter Name="brand_id" Type="numeric" Mode="In" />
+          <Parameter Name="driving_license" Type="varchar" Mode="In" />
+          <Parameter Name="veh_purchase_date" Type="date" Mode="In" />
+          <Parameter Name="user_id" Type="numeric" Mode="In" />
+          <Parameter Name="model_name" Type="varchar" Mode="In" />
+          <Parameter Name="chasis_no" Type="numeric" Mode="In" />
+          <Parameter Name="vehicle_cc" Type="numeric" Mode="In" />
+          <Parameter Name="market_price" Type="money" Mode="In" />
+          <Parameter Name="engine_no" Type="numeric" Mode="In" />
+          <Parameter Name="plan_type" Type="varchar" Mode="In" />
+          <Parameter Name="plan_duration" Type="numeric" Mode="In" />
+          <Parameter Name="idv" Type="money" Mode="In" />
+          <Parameter Name="total_tp_prem_amt" Type="money" Mode="In" />
+          <Parameter Name="total_od_prem_amt" Type="money" Mode="In" />
+          <Parameter Name="total_payable" Type="money" Mode="In" />
+          <Parameter Name="card_holder_name" Type="varchar" Mode="In" />
+          <Parameter Name="card_number" Type="numeric" Mode="In" />
+          <Parameter Name="exp_month" Type="numeric" Mode="In" />
+          <Parameter Name="exp_year" Type="numeric" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="renew_policy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user_id" Type="numeric" Mode="In" />
+          <Parameter Name="policy_no" Type="numeric" Mode="In" />
+          <Parameter Name="market_price" Type="numeric" Mode="In" />
+          <Parameter Name="plan_type" Type="varchar" Mode="In" />
+          <Parameter Name="plan_duration" Type="numeric" Mode="In" />
+          <Parameter Name="idv" Type="money" Mode="In" />
+          <Parameter Name="total_tp_prem_amt" Type="money" Mode="In" />
+          <Parameter Name="total_od_prem_amt" Type="money" Mode="In" />
+          <Parameter Name="total_payable" Type="money" Mode="In" />
+          <Parameter Name="card_holder_name" Type="varchar" Mode="In" />
+          <Parameter Name="card_number" Type="numeric" Mode="In" />
+          <Parameter Name="exp_month" Type="numeric" Mode="In" />
+          <Parameter Name="exp_year" Type="numeric" Mode="In" />
+          <Parameter Name="message" Type="varchar" Mode="InOut" />
+        </Function>
         <EntityContainer Name="General_InsuranceModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Brand_Names" EntityType="Self.Brand_Names" Schema="dbo" store:Type="Tables" />
@@ -384,7 +425,7 @@
           <Property Name="Amount" Type="Int32" />
           <Property Name="Payment_date" Type="DateTime" Precision="0" />
           <Property Name="Card_holder_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Card_number" Type="Int64" />
+          <Property Name="Card_number" Type="Int32" />
           <Property Name="Exp_Month" Type="Int32" />
           <Property Name="Exp_year" Type="Int32" />
           <Property Name="Payment_status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -420,6 +461,7 @@
           <NavigationProperty Name="Policy_Plans" Relationship="Self.FK__Subscript__Polic__38996AB5" FromRole="Subscription_plan" ToRole="Policy_Plans" />
           <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Subscript__Reg_N__398D8EEE" FromRole="Subscription_plan" ToRole="Vehicle_Info" />
           <NavigationProperty Name="User_Registration" Relationship="Self.FK__Subscript__User___37A5467C" FromRole="Subscription_plan" ToRole="User_Registration" />
+          <Property Name="End_date" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="Third_Party_Prem">
           <Key>
@@ -623,6 +665,46 @@
             <End Role="User_Registration" EntitySet="User_Registration" />
             <End Role="Vehicle_Info" EntitySet="Vehicle_Info" />
           </AssociationSet>
+          <FunctionImport Name="add_user_sub">
+            <Parameter Name="reg_no" Mode="In" Type="String" />
+            <Parameter Name="vehicle_type" Mode="In" Type="String" />
+            <Parameter Name="brand_id" Mode="In" Type="Decimal" />
+            <Parameter Name="driving_license" Mode="In" Type="String" />
+            <Parameter Name="veh_purchase_date" Mode="In" Type="DateTime" />
+            <Parameter Name="user_id" Mode="In" Type="Decimal" />
+            <Parameter Name="model_name" Mode="In" Type="String" />
+            <Parameter Name="chasis_no" Mode="In" Type="Decimal" />
+            <Parameter Name="vehicle_cc" Mode="In" Type="Decimal" />
+            <Parameter Name="market_price" Mode="In" Type="Decimal" />
+            <Parameter Name="engine_no" Mode="In" Type="Decimal" />
+            <Parameter Name="plan_type" Mode="In" Type="String" />
+            <Parameter Name="plan_duration" Mode="In" Type="Decimal" />
+            <Parameter Name="idv" Mode="In" Type="Decimal" />
+            <Parameter Name="total_tp_prem_amt" Mode="In" Type="Decimal" />
+            <Parameter Name="total_od_prem_amt" Mode="In" Type="Decimal" />
+            <Parameter Name="total_payable" Mode="In" Type="Decimal" />
+            <Parameter Name="card_holder_name" Mode="In" Type="String" />
+            <Parameter Name="card_number" Mode="In" Type="Decimal" />
+            <Parameter Name="exp_month" Mode="In" Type="Decimal" />
+            <Parameter Name="exp_year" Mode="In" Type="Decimal" />
+            <Parameter Name="message" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="renew_policy">
+            <Parameter Name="user_id" Mode="In" Type="Decimal" />
+            <Parameter Name="policy_no" Mode="In" Type="Decimal" />
+            <Parameter Name="market_price" Mode="In" Type="Decimal" />
+            <Parameter Name="plan_type" Mode="In" Type="String" />
+            <Parameter Name="plan_duration" Mode="In" Type="Decimal" />
+            <Parameter Name="idv" Mode="In" Type="Decimal" />
+            <Parameter Name="total_tp_prem_amt" Mode="In" Type="Decimal" />
+            <Parameter Name="total_od_prem_amt" Mode="In" Type="Decimal" />
+            <Parameter Name="total_payable" Mode="In" Type="Decimal" />
+            <Parameter Name="card_holder_name" Mode="In" Type="String" />
+            <Parameter Name="card_number" Mode="In" Type="Decimal" />
+            <Parameter Name="exp_month" Mode="In" Type="Decimal" />
+            <Parameter Name="exp_year" Mode="In" Type="Decimal" />
+            <Parameter Name="message" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -727,6 +809,7 @@
           <EntitySetMapping Name="Subscription_plan">
             <EntityTypeMapping TypeName="General_InsuranceModel.Subscription_plan">
               <MappingFragment StoreEntitySet="Subscription_plan">
+                <ScalarProperty Name="End_date" ColumnName="End_date" />
                 <ScalarProperty Name="Policy_No" ColumnName="Policy_No" />
                 <ScalarProperty Name="User_Id" ColumnName="User_Id" />
                 <ScalarProperty Name="Policy_plan_id" ColumnName="Policy_plan_id" />
@@ -782,6 +865,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="add_user_sub" FunctionName="General_InsuranceModel.Store.add_user_sub" />
+          <FunctionImportMapping FunctionImportName="renew_policy" FunctionName="General_InsuranceModel.Store.renew_policy" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -20,7 +20,7 @@ namespace GenInsWebApi.Models
         public Nullable<int> Amount { get; set; }
         public Nullable<System.DateTime> Payment_date { get; set; }
         public string Card_holder_name { get; set; }
-        public Nullable<long> Card_number { get; set; }
+        public Nullable<int> Card_number { get; set; }
         public Nullable<int> Exp_Month { get; set; }
         public Nullable<int> Exp_year { get; set; }
         public string Payment_status { get; set; }
