@@ -33,6 +33,7 @@ namespace GenInsWebApi.Controllers
                 claim_insurance.Claim_approval_status = claim.Claim_approval_status;
                 claim_insurance.Claim_amt = claim.Claim_amt;
 
+                claim_insurance.Claim_approval_status = "Pending";
                 claim.Claim_approval_status = "Pending";
                 db.Claim_Insurance.Add(claim_insurance);
                 db.SaveChanges();
