@@ -16,33 +16,42 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult insert(BuyInsuranceApi apiObj)
         {
-            ObjectParameter message = new ObjectParameter("message", typeof(string));
+            try
+            {
+                ObjectParameter message = new ObjectParameter("message", typeof(string));
 
-            var res = db.add_user_sub(
-                apiObj.registeration_number,
-                apiObj.veh_type,
-                apiObj.brand_name,
-                apiObj.license_no,
-                apiObj.purchase_date,
-                apiObj.User_Id,
-                apiObj.model_name,
-                apiObj.chassis_number,
-                apiObj.vehicle_cc,
-                apiObj.market_price,
-                apiObj.engine_number,
-                apiObj.plan_type,
-                apiObj.plan_duration,
-                apiObj.idv,
-                apiObj.total_tp,
-                apiObj.total_od,
-                apiObj.total_payable,
-                apiObj.card_holder_name,
-                apiObj.card_no,
-                apiObj.card_exp_month,
-                apiObj.card_exp_year,
-                message);
+                var res = db.add_user_sub(
+                    apiObj.registeration_number,
+                    apiObj.veh_type,
+                    apiObj.brand_name,
+                    apiObj.license_no,
+                    apiObj.purchase_date,
+                    apiObj.User_Id,
+                    apiObj.model_name,
+                    apiObj.chassis_number,
+                    apiObj.vehicle_cc,
+                    apiObj.market_price,
+                    apiObj.engine_number,
+                    apiObj.plan_type,
+                    apiObj.plan_duration,
+                    apiObj.idv,
+                    apiObj.total_tp,
+                    apiObj.total_od,
+                    apiObj.total_payable,
+                    apiObj.card_holder_name,
+                    apiObj.card_no,
+                    apiObj.card_exp_month,
+                    apiObj.card_exp_year,
+                    message);
 
-            return Ok(message);
+                return Ok(message);
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+            
         }
     }
 

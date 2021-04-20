@@ -14,7 +14,9 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object subscriptionPlan_details(int User_Id)
         {
-            var res = db.Subscription_plan
+            try
+            {
+                var res = db.Subscription_plan
                 .Where(x => x.User_Id == User_Id && x.User_Id == x.Vehicle_Info.User_Id)
                 .Select(x => new Subscriptionresponse()
                 {
@@ -33,7 +35,14 @@ namespace GenInsWebApi.Controllers
                 }).ToList();
 
 
-            return Ok(res);
+                return res;
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
+            
 
         }
     }

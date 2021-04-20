@@ -33,31 +33,37 @@ namespace GenInsWebApi.Controllers
                 claim_insurance.Claim_approval_status = claim.Claim_approval_status;
                 claim_insurance.Claim_amt = claim.Claim_amt;
 
-                claim_insurance.Claim_approval_status = "Pending";
-                claim.Claim_approval_status = "Pending";
-                db.Claim_Insurance.Add(claim_insurance);
-                db.SaveChanges();
-                claim.message = "Successfull";
-                return Ok(claim);
-            }
-            else
-            {
-                if(UserAuthentication != true)
-                {
-                    claim.message = "You are not having this policy subscription";
-                    return Ok(claim);
-                }
-                else if (PolicyActive != true)
-                {
-                    claim.message = "Policy is not active";
+                    claim.Claim_approval_status = "Pending";
+                    db.Claim_Insurance.Add(claim_insurance);
+                    db.SaveChanges();
+                    claim.message = "Successfull";
                     return Ok(claim);
                 }
                 else
                 {
-                    claim.message = "Claim for this policy number is already existing";
-                    return Ok(claim);
+                    if (UserAuthentication != true)
+                    {
+                        claim.message = "You are not having this policy subscription";
+                        return Ok(claim);
+                    }
+                    else if (PolicyActive != true)
+                    {
+                        claim.message = "Policy is not active";
+                        return Ok(claim);
+                    }
+                    else
+                    {
+                        claim.message = "Claim for this policy number is already existing";
+                        return Ok(claim);
+                    }
                 }
             }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+            
         }
         
     }

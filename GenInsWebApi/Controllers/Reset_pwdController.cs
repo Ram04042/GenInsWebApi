@@ -21,24 +21,33 @@ namespace GenInsWebApi.Models
 
         public IHttpActionResult Forget(Reset_Pwd reset_Pwd)
         {
-            //reset_Pwd.token = reset_Pwd.Email_id;
-            reset_Pwd.token = Decryptword(reset_Pwd.token);
-            reset_Pwd.password = Encryptword(reset_Pwd.password);
-            var res = db.User_Registration
-                    .Where(x => (x.Email_ID == reset_Pwd.token))
-                    .FirstOrDefault<User_Registration>();
-            if (res != null)
+            try
             {
-                reset_Pwd.message = "Successfull";
-                res.Password = reset_Pwd.password;
-                db.SaveChanges();
-                return Ok(reset_Pwd.message);
+                //reset_Pwd.token = reset_Pwd.Email_id;
+                reset_Pwd.token = Decryptword(reset_Pwd.token);
+                reset_Pwd.password = Encryptword(reset_Pwd.password);
+                var res = db.User_Registration
+                        .Where(x => (x.Email_ID == reset_Pwd.token))
+                        .FirstOrDefault<User_Registration>();
+                if (res != null)
+                {
+                    reset_Pwd.message = "Successfull";
+                    res.Password = reset_Pwd.password;
+                    db.SaveChanges();
+                    return Ok(reset_Pwd.message);
+                }
+                else
+                {
+                    reset_Pwd.message = "Invalid";
+                    return Ok(reset_Pwd.message);
+                }
             }
-            else
+            catch(Exception e)
             {
-                reset_Pwd.message = "Invalid";
-                return Ok(reset_Pwd.message);
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
             }
+            
         }
         public string Encryptword(string Encryptval)
         {

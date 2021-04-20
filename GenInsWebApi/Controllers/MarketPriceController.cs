@@ -10,19 +10,29 @@ namespace GenInsWebApi.Controllers
 {
     public class MarketPriceController : ApiController
     {
+       
         General_InsuranceEntities db = new General_InsuranceEntities();
 
         [HttpGet]
         public IHttpActionResult getMarketPrice(string Model_Name)
         {
-
-            var res = db.Model_od_prem_amt
+            try
+            {
+                var res = db.Model_od_prem_amt
                 .Where(x => x.Model_Name == Model_Name)
                 .Select(x => new marketPriceResponse()
                 {
                     Market_Price = x.market_price
                 }).FirstOrDefault();
-            return Ok(res);
+                return Ok(res);
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+
+            
         }
     }
 
