@@ -24,7 +24,6 @@ namespace GenInsWebApi.Models
         public Nullable<bool> Injury_to_Thirdparty { get; set; }
         public string Claim_approval_status { get; set; }
         public Nullable<decimal> Claim_amt { get; set; }
-        public string message { get; set; }
         public virtual Subscription_plan Subscription_plan { get; set; }
     }
 }

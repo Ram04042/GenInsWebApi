@@ -22,6 +22,7 @@ namespace GenInsWebApi.Controllers
                     Claim_approval_status = x.Claim_approval_status,
                     Date_claimed = x.Date_claimed,
                     Claim_amt=x.Claim_amt,
+                    IDV=x.Subscription_plan.IDV,
                     message = "Successfull"
                 }).ToList();
             return Ok(claim);
@@ -39,6 +40,7 @@ namespace GenInsWebApi.Controllers
                     Date_claimed = x.Date_claimed,
                     Claim_approval_status = x.Claim_approval_status,
                     Claim_amt=x.Claim_amt,
+                    IDV = x.Subscription_plan.IDV,
                 }).FirstOrDefault();
             return Ok(claim_info);
         }
@@ -75,7 +77,7 @@ namespace GenInsWebApi.Controllers
         public bool Injury_to_Thirdparty { get; set; }
         public string Claim_approval_status { get; set; }
         public decimal? Claim_amt { get; set; }
-
+        public Nullable<decimal> IDV { get; set; }
         public string message { get; set; }
     }
 }
