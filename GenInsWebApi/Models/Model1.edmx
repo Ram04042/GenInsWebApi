@@ -58,6 +58,7 @@
           <Property Name="vehicle_type" Type="varchar" MaxLength="20" />
           <Property Name="Veh_based_od_prem" Type="float" />
           <Property Name="Brand_Id" Type="int" />
+          <Property Name="market_price" Type="money" />
         </EntityType>
         <EntityType Name="No_Claim_Bonus">
           <Key>
@@ -74,7 +75,7 @@
           <Property Name="Payment_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Policy_No" Type="int" />
           <Property Name="User_Id" Type="int" />
-          <Property Name="Amount" Type="int" />
+          <Property Name="Amount" Type="money" />
           <Property Name="Payment_date" Type="date" />
           <Property Name="Card_holder_name" Type="varchar" MaxLength="50" />
           <Property Name="Card_number" Type="bigint" />
@@ -406,6 +407,7 @@
           <Property Name="Brand_Id" Type="Int32" />
           <NavigationProperty Name="Brand_Names" Relationship="Self.FK__Model_od___Brand__29572725" FromRole="Model_od_prem_amt" ToRole="Brand_Names" />
           <NavigationProperty Name="Vehicle_Info" Relationship="Self.FK__Vehicle_I__Model__2D27B809" FromRole="Model_od_prem_amt" ToRole="Vehicle_Info" />
+          <Property Name="market_price" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
         <EntityType Name="No_Claim_Bonus">
           <Key>
@@ -765,6 +767,7 @@
           <EntitySetMapping Name="Model_od_prem_amt">
             <EntityTypeMapping TypeName="General_InsuranceModel.Model_od_prem_amt">
               <MappingFragment StoreEntitySet="Model_od_prem_amt">
+                <ScalarProperty Name="market_price" ColumnName="market_price" />
                 <ScalarProperty Name="Model_Name" ColumnName="Model_Name" />
                 <ScalarProperty Name="vehicle_type" ColumnName="vehicle_type" />
                 <ScalarProperty Name="Veh_based_od_prem" ColumnName="Veh_based_od_prem" />

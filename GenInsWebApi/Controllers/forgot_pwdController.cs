@@ -21,15 +21,24 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult Forget(Reset_Pwd reset_Pwd)
         {
-            //reset_Pwd.token = reset_Pwd.Email_id;
-            reset_Pwd.token = Decryptword(reset_Pwd.token);
-            reset_Pwd.password = Encryptword(reset_Pwd.password);
-            var res = db.User_Registration
-                    .Where(x => (x.Email_ID == reset_Pwd.token))
-                    .FirstOrDefault();
-            res.Password = reset_Pwd.password;
-            db.SaveChanges();
-            return Ok();
+            try
+            {
+                //reset_Pwd.token = reset_Pwd.Email_id;
+                reset_Pwd.token = Decryptword(reset_Pwd.token);
+                reset_Pwd.password = Encryptword(reset_Pwd.password);
+                var res = db.User_Registration
+                        .Where(x => (x.Email_ID == reset_Pwd.token))
+                        .FirstOrDefault();
+                res.Password = reset_Pwd.password;
+                db.SaveChanges();
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+            
         }
         public string Encryptword(string Encryptval)
         {

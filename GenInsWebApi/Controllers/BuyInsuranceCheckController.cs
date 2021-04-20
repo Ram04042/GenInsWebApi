@@ -14,23 +14,28 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult Subscheck(regnoclass robj)
         {
-
-            bool subsPlanExists = db.Subscription_plan.Any(x => x.Reg_No == robj.registration_no && x.Status_of_sub == "Active");
-
-            var responseobj = new response();
-            if(subsPlanExists != true)
+            try
             {
-                responseobj.message = "Valid";
+                bool subsPlanExists = db.Subscription_plan.Any(x => x.Reg_No == robj.registration_no && x.Status_of_sub == "Active");
+
+                var responseobj = new response();
+                if (subsPlanExists != true)
+                {
+                    responseobj.message = "Valid";
+                }
+                else
+                {
+                    responseobj.message = "Invalid";
+                }
+
+                return Ok(responseobj);
             }
-            else
+            catch(Exception e)
             {
-                responseobj.message = "Invalid";
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
             }
-
-            return Ok(responseobj);
-
-
-
+            
         }
     }
 

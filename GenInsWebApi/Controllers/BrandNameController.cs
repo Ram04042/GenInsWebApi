@@ -15,7 +15,9 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object getBrands(vehTypeApiClass va)
         {
-            var res = db.Model_od_prem_amt
+            try
+            {
+                var res = db.Model_od_prem_amt
                 .Where(x => x.vehicle_type == va.vehicle_type)
                 .Select(x => new brandsResponse()
                 {
@@ -24,9 +26,15 @@ namespace GenInsWebApi.Controllers
                     Brand_Id = x.Brand_Names.Brand_Id
 
                 }).Distinct();
+                //throw new Exception();
 
-
-            return Ok(res);
+                return res;
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
 
         }
 

@@ -10,26 +10,22 @@ using System.Security.Cryptography;
 
 namespace GenInsWebApi.Controllers
 {
-    public class LoginController : ApiController
+    public class AdminLoginController : ApiController
     {
         string key = "1prt56";
 
         General_InsuranceEntities db = new General_InsuranceEntities();
-        public object login(LoginApiClass l)
+
+        public object Adminlogin(AdminloginResponse adminlogin)
         {
             try
             {
-                l.Password = Encryptword(l.Password);
-                var res = db.User_Registration
-                            .Where(x => (x.Email_ID == l.Email_ID && x.Password == l.Password))
-                            .Select(x => new loginResponse()
+                adminlogin.Password = Encryptword(adminlogin.Password);
+                var res = db.Admins
+                            .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
+                            .Select(x => new AdminloginResponse()
                             {
-                                User_Id = x.User_Id,
-                                Email_ID = x.Email_ID,
-                                Name = x.Name,
-                                Phone_No = x.Phone_No,
-                                DOB = x.DOB,
-                                Address = x.Address,
+                                Admin_id = x.Admin_id,
                                 message = "Successfull"
                             })
                             .FirstOrDefault();
@@ -39,11 +35,11 @@ namespace GenInsWebApi.Controllers
                     return res;
                 }
 
-                res = new loginResponse();
+                res = new AdminloginResponse();
                 res.message = "Invalid";
                 return res;
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
                 return response;
@@ -67,30 +63,15 @@ namespace GenInsWebApi.Controllers
             objt.Clear();
             return Convert.ToBase64String(resArray, 0, resArray.Length);
         }
-
     }
-
-
-
-    public class loginResponse
+    public class AdminloginResponse
     {
-        public int User_Id { get; set; }
 
-        public string Email_ID { get; set; }
+        public string Admin_id { get; set; }
 
-        public string Name { get; set; }
-
-        public string Phone_No { get; set; }
-
-        public Nullable<System.DateTime> DOB { get; set; }
-
-        public string Address { get; set; }
-
-
+        public string Password { get; set; }
 
         public string message { get; set; }
 
-
     }
-
 }

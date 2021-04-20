@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>false</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -168,6 +169,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AdminLoginController.cs" />
     <Compile Include="Controllers\BuyInsuranceCheckController.cs" />
     <Compile Include="Controllers\BuyInsuranceController.cs" />
     <Compile Include="Controllers\Admin.cs" />
@@ -179,8 +181,10 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Mail.cs" />
     <Compile Include="Controllers\MailController.cs" />
+    <Compile Include="Controllers\MarketPriceController.cs" />
     <Compile Include="Controllers\ModelNameController.cs" />
     <Compile Include="Controllers\BrandNameController.cs" />
+    <Compile Include="Controllers\PolicyDetailsController.cs" />
     <Compile Include="Controllers\PremiumAmountController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RenewCheckController.cs" />
