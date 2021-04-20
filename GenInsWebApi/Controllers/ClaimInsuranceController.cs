@@ -16,6 +16,7 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                throw new Exception();
                 bool UserAuthentication = db.Subscription_plan.Any(x => x.User_Id == claim.User_Id && x.Policy_No == claim.Policy_No);
                 bool PolicyActive = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub == "active");
                 bool ClaimExists = db.Claim_Insurance.Any(x => x.Policy_No == claim.Policy_No && (x.Claim_approval_status == "Pending" || x.Claim_approval_status == "Under Verification"));
