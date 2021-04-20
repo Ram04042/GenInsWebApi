@@ -17,29 +17,38 @@ namespace GenInsWebApi.Controllers
         General_InsuranceEntities db = new General_InsuranceEntities();
         public object login(LoginApiClass l)
         {
-            l.Password = Encryptword(l.Password);
-            var res = db.User_Registration
-                        .Where(x => (x.Email_ID == l.Email_ID && x.Password == l.Password))
-                        .Select(x => new loginResponse()
-                        {
-                            User_Id = x.User_Id,
-                            Email_ID = x.Email_ID,
-                            Name = x.Name,
-                            Phone_No = x.Phone_No,
-                            DOB = x.DOB,
-                            Address = x.Address,
-                            message = "Successfull"
-                        })
-                        .FirstOrDefault();
-
-            if (res != null)
+            try
             {
-                return Ok(res);
-            }
+                l.Password = Encryptword(l.Password);
+                var res = db.User_Registration
+                            .Where(x => (x.Email_ID == l.Email_ID && x.Password == l.Password))
+                            .Select(x => new loginResponse()
+                            {
+                                User_Id = x.User_Id,
+                                Email_ID = x.Email_ID,
+                                Name = x.Name,
+                                Phone_No = x.Phone_No,
+                                DOB = x.DOB,
+                                Address = x.Address,
+                                message = "Successfull"
+                            })
+                            .FirstOrDefault();
 
-            res = new loginResponse();
-            res.message = "Invalid";
-            return Ok(res);
+                if (res != null)
+                {
+                    return res;
+                }
+
+                res = new loginResponse();
+                res.message = "Invalid";
+                return res;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
+            
         }
         public string Encryptword(string Encryptval)
         {

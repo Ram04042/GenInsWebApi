@@ -17,33 +17,42 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object getpremimum(premapiclass pc)
         {
-            var odpremper = db.Model_od_prem_amt
+            try
+            {
+                var odpremper = db.Model_od_prem_amt
                 .Where(x => x.Model_Name == pc.Model_Name)
                 .Select(x => new premapires()
                 {
                     od_prem_per = x.Veh_based_od_prem
                 }).FirstOrDefault();
 
-            var thirdpartyprem = db.Third_Party_Prem
-                .Where(x => pc.vehicle_cc >= x.Vehicle_CC_Min && pc.vehicle_cc <= x.Vehicle_CC_Max && x.Vehicle_Type == pc.vehicle_type)
-                .Select(x => new premapires()
-                {
-                    thirdpartyprem = x.Fixed_TP_Prem
-                }).FirstOrDefault();
+                var thirdpartyprem = db.Third_Party_Prem
+                    .Where(x => pc.vehicle_cc >= x.Vehicle_CC_Min && pc.vehicle_cc <= x.Vehicle_CC_Max && x.Vehicle_Type == pc.vehicle_type)
+                    .Select(x => new premapires()
+                    {
+                        thirdpartyprem = x.Fixed_TP_Prem
+                    }).FirstOrDefault();
 
-            var depper = db.Depreciation_Percentage
-                .Where(x => x.Age == pc.age)
-                .Select(x => new premapires()
-                {
-                    dep_per = x.Depreciation_percentage1
-                }).FirstOrDefault();
+                var depper = db.Depreciation_Percentage
+                    .Where(x => x.Age == pc.age)
+                    .Select(x => new premapires()
+                    {
+                        dep_per = x.Depreciation_percentage1
+                    }).FirstOrDefault();
 
-            premapires resobj = new premapires();
-            resobj.od_prem_per = odpremper.od_prem_per;
-            resobj.thirdpartyprem = thirdpartyprem.thirdpartyprem;
-            resobj.dep_per = depper.dep_per;
+                premapires resobj = new premapires();
+                resobj.od_prem_per = odpremper.od_prem_per;
+                resobj.thirdpartyprem = thirdpartyprem.thirdpartyprem;
+                resobj.dep_per = depper.dep_per;
+
+                return resobj;
+            }
+            catch (Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
             
-            return Ok(resobj);
 
         }
     }

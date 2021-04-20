@@ -15,26 +15,35 @@ namespace GenInsWebApi.Controllers
 
         public IHttpActionResult insert(RenewInsuranceApi apiObj)
         {
-            ObjectParameter message = new ObjectParameter("message", typeof(string));
+            try
+            {
+                ObjectParameter message = new ObjectParameter("message", typeof(string));
 
-            var res = db.renew_policy(
-                
-                apiObj.User_Id,
-                apiObj.policy_no,
-                apiObj.market_price,
-                apiObj.plan_type,
-                apiObj.plan_duration,
-                apiObj.idv,
-                apiObj.total_tp,
-                apiObj.total_od,
-                apiObj.total_payable,
-                apiObj.card_holder_name,
-                apiObj.card_no,
-                apiObj.card_exp_month,
-                apiObj.card_exp_year,
-                message);
+                var res = db.renew_policy(
 
-            return Ok(message);
+                    apiObj.User_Id,
+                    apiObj.policy_no,
+                    apiObj.market_price,
+                    apiObj.plan_type,
+                    apiObj.plan_duration,
+                    apiObj.idv,
+                    apiObj.total_tp,
+                    apiObj.total_od,
+                    apiObj.total_payable,
+                    apiObj.card_holder_name,
+                    apiObj.card_no,
+                    apiObj.card_exp_month,
+                    apiObj.card_exp_year,
+                    message);
+
+                return Ok(message);
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+            
         }
     }
 
