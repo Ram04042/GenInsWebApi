@@ -181,6 +181,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Mail.cs" />
     <Compile Include="Controllers\MailController.cs" />
+    <Compile Include="Controllers\MarketPriceController.cs" />
     <Compile Include="Controllers\ModelNameController.cs" />
     <Compile Include="Controllers\BrandNameController.cs" />
     <Compile Include="Controllers\PolicyDetailsController.cs" />

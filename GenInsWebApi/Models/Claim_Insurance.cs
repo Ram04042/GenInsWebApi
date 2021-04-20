@@ -14,6 +14,7 @@ namespace GenInsWebApi.Models
     
     public partial class Claim_Insurance
     {
+
         public int Claim_no { get; set; }
         public Nullable<int> Policy_No { get; set; }
         public string Reasons { get; set; }
