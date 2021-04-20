@@ -14,25 +14,28 @@ namespace GenInsWebApi.Controllers
         
         public IHttpActionResult Claim(ClaimInsurance_Response claim)
         {
-            bool UserAuthentication = db.Subscription_plan.Any(x => x.User_Id == claim.User_Id && x.Policy_No == claim.Policy_No);
-            bool PolicyActive = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub=="active");
-            bool ClaimExists = db.Claim_Insurance.Any(x => x.Policy_No == claim.Policy_No && (x.Claim_approval_status == "Pending" || x.Claim_approval_status == "Under Verification"));
+            try 
+            { 
+                bool UserAuthentication = db.Subscription_plan.Any(x => x.User_Id == claim.User_Id && x.Policy_No == claim.Policy_No);
+                bool PolicyActive = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub=="active");
+                bool ClaimExists = db.Claim_Insurance.Any(x => x.Policy_No == claim.Policy_No && (x.Claim_approval_status == "Pending" || x.Claim_approval_status == "Under Verification"));
             
-            if(UserAuthentication == true && PolicyActive == true && ClaimExists != true)
-            {
-                Claim_Insurance claim_insurance = new Claim_Insurance();
+                if(UserAuthentication == true && PolicyActive == true && ClaimExists != true)
+                {
+                    Claim_Insurance claim_insurance = new Claim_Insurance();
 
-                claim_insurance.Claim_no = claim.Claim_no;
-                claim_insurance.Policy_No = claim.Policy_No;
-                claim_insurance.Reasons = claim.Reasons;
-                claim_insurance.Date_claimed = claim.Date_claimed;
-                claim_insurance.Date_of_Loss = claim.Date_of_Loss;
-                claim_insurance.Place_of_Loss = claim.Place_of_Loss;
-                claim_insurance.Damage_Description = claim.Damage_Description;
-                claim_insurance.Injury_to_Thirdparty = claim.Injury_to_Thirdparty;
-                claim_insurance.Claim_approval_status = claim.Claim_approval_status;
-                claim_insurance.Claim_amt = claim.Claim_amt;
+                    claim_insurance.Claim_no = claim.Claim_no;
+                    claim_insurance.Policy_No = claim.Policy_No;
+                    claim_insurance.Reasons = claim.Reasons;
+                    claim_insurance.Date_claimed = claim.Date_claimed;
+                    claim_insurance.Date_of_Loss = claim.Date_of_Loss;
+                    claim_insurance.Place_of_Loss = claim.Place_of_Loss;
+                    claim_insurance.Damage_Description = claim.Damage_Description;
+                    claim_insurance.Injury_to_Thirdparty = claim.Injury_to_Thirdparty;
+                    claim_insurance.Claim_approval_status = claim.Claim_approval_status;
+                    claim_insurance.Claim_amt = claim.Claim_amt;
 
+                    claim_insurance.Claim_approval_status = "Pending";
                     claim.Claim_approval_status = "Pending";
                     db.Claim_Insurance.Add(claim_insurance);
                     db.SaveChanges();
@@ -41,22 +44,22 @@ namespace GenInsWebApi.Controllers
                 }
                 else
                 {
-                    if (UserAuthentication != true)
-                    {
-                        claim.message = "You are not having this policy subscription";
-                        return Ok(claim);
-                    }
-                    else if (PolicyActive != true)
-                    {
-                        claim.message = "Policy is not active";
-                        return Ok(claim);
-                    }
-                    else
-                    {
-                        claim.message = "Claim for this policy number is already existing";
-                        return Ok(claim);
-                    }
-                }
+                        if (UserAuthentication != true)
+                        {
+                            claim.message = "You are not having this policy subscription";
+                            return Ok(claim);
+                        }
+                        else if (PolicyActive != true)
+                        {
+                            claim.message = "Policy is not active";
+                            return Ok(claim);
+                        }
+                        else
+                        {
+                            claim.message = "Claim for this policy number is already existing";
+                            return Ok(claim);
+                        }
+                 }
             }
             catch(Exception e)
             {
