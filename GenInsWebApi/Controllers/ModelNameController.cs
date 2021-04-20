@@ -16,6 +16,7 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                //throw new Exception();
                 var res = db.Model_od_prem_amt
                 .Where(x => x.Brand_Id == ba.Brand_Id && x.vehicle_type == ba.vehicle_type)
                 .Select(x => new modelsResponse()
@@ -31,7 +32,7 @@ namespace GenInsWebApi.Controllers
             catch(Exception e)
             {
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-                return Ok(response);
+                return response;
             }
             
 

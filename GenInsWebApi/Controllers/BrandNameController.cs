@@ -28,7 +28,6 @@ namespace GenInsWebApi.Controllers
                 }).Distinct();
                 //throw new Exception();
 
-                //return Ok(res);
                 return res;
             }
             catch(Exception e)
