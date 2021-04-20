@@ -24,6 +24,7 @@ namespace GenInsWebApi.Models
         public string vehicle_type { get; set; }
         public Nullable<double> Veh_based_od_prem { get; set; }
         public Nullable<int> Brand_Id { get; set; }
+        public Nullable<decimal> market_price { get; set; }
     
         public virtual Brand_Names Brand_Names { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
