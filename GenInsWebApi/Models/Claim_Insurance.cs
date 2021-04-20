@@ -14,6 +14,7 @@ namespace GenInsWebApi.Models
     
     public partial class Claim_Insurance
     {
+
         public int Claim_no { get; set; }
         public Nullable<int> Policy_No { get; set; }
         public string Reasons { get; set; }
@@ -24,6 +25,7 @@ namespace GenInsWebApi.Models
         public Nullable<bool> Injury_to_Thirdparty { get; set; }
         public string Claim_approval_status { get; set; }
         public Nullable<decimal> Claim_amt { get; set; }
+    
         public virtual Subscription_plan Subscription_plan { get; set; }
     }
 }

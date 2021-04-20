@@ -35,6 +35,8 @@ namespace GenInsWebApi.Controllers
                             subscription_status = x.Status_of_sub,
                         }).FirstOrDefault();
 
+
+
             var responseObj = new renewCheckResponse();
             if(res==null)
             {
@@ -42,10 +44,27 @@ namespace GenInsWebApi.Controllers
             }
             else
             {
-                responseObj = res;
-                responseObj.subscription_status = res.subscription_status;
-                responseObj.message = "Valid";
+
+                var resByRegNo = db.Subscription_plan.Any(x => x.Reg_No == res.registeration_number && x.Status_of_sub == "Active");
+
+                if (resByRegNo == true || res.subscription_status=="Active")
+                {
+                    responseObj.message = "Already having active policy";
+
+                }
+                else
+                {
+                    responseObj = res;
+                    responseObj.subscription_status = res.subscription_status;
+                    responseObj.message = "Valid";
+                }
+
+
             }
+            
+            
+            
+            
 
             return responseObj;
 
