@@ -15,16 +15,17 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object getPolicyDetails(policyDetailsApi policyobj)
         {
-
-            var res = db.Subscription_plan
+            try
+            {
+                var res = db.Subscription_plan
                         .Where(x => x.Policy_No == policyobj.policy_no && x.User_Id == policyobj.User_Id)
-                        .Select(x=> new policyDetailsResponse()
+                        .Select(x => new policyDetailsResponse()
                         {
                             Name = x.User_Registration.Name,
                             Address = x.User_Registration.Address,
                             Phone_no = x.User_Registration.Phone_No,
                             Email = x.User_Registration.Email_ID,
-                            
+
                             Vehicle_Type = x.Vehicle_Info.Vehicle_Type,
                             Manufacturer_Name = x.Vehicle_Info.Manufacturer_Name,
                             Model_Name = x.Vehicle_Info.Model_Name,
@@ -47,27 +48,30 @@ namespace GenInsWebApi.Controllers
                             total_tp = x.Total_tp_prem_amt,
                             total_od = x.Total_od_prem_amt,
                             total_payable = x.Total_Payable,
-                            
-                            
 
 
-                         })
+
+
+                        })
                         .FirstOrDefault();
 
 
-            if(res==null)
-            {
-                var errrorRes = new policyDetailsResponse();
-                errrorRes.message = "Access Denied";
-                return errrorRes;
+                if (res == null)
+                {
+                    var errrorRes = new policyDetailsResponse();
+                    errrorRes.message = "Access Denied";
+                    return errrorRes;
+                }
+                else
+                {
+                    return res;
+                }
             }
-            else
+            catch (Exception e)
             {
-                return res;
-
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
             }
-            
-
 
         }
     }

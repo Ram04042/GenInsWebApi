@@ -14,17 +14,25 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object getModels(brandIdVehtypeApiClass ba)
         {
-            var res = db.Model_od_prem_amt
-                .Where(x => x.Brand_Id == ba.Brand_Id && x.vehicle_type==ba.vehicle_type)
+            try
+            {
+                var res = db.Model_od_prem_amt
+                .Where(x => x.Brand_Id == ba.Brand_Id && x.vehicle_type == ba.vehicle_type)
                 .Select(x => new modelsResponse()
                 {
                     Brand_Id = x.Brand_Id,
                     Model_Name = x.Model_Name
 
                 });
-
-
-            return Ok(res);
+                //return Ok(res);
+                return res;
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return Ok(response);
+            }
+            
 
         }
 

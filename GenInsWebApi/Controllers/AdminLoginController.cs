@@ -18,24 +18,33 @@ namespace GenInsWebApi.Controllers
 
         public object Adminlogin(AdminloginResponse adminlogin)
         {
-            adminlogin.Password = Encryptword(adminlogin.Password);
-            var res = db.Admins
-                        .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
-                        .Select(x => new AdminloginResponse()
-                        {
-                            Admin_id = x.Admin_id,
-                            message = "Successfull"
-                        })
-                        .FirstOrDefault();
-
-            if (res != null)
+            try
             {
-                return Ok(res);
-            }
+                adminlogin.Password = Encryptword(adminlogin.Password);
+                var res = db.Admins
+                            .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
+                            .Select(x => new AdminloginResponse()
+                            {
+                                Admin_id = x.Admin_id,
+                                message = "Successfull"
+                            })
+                            .FirstOrDefault();
 
-            res = new AdminloginResponse();
-            res.message = "Invalid";
-            return Ok(res);
+                if (res != null)
+                {
+                    return res;
+                }
+
+                res = new AdminloginResponse();
+                res.message = "Invalid";
+                return res;
+            }
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
+            
         }
         public string Encryptword(string Encryptval)
         {

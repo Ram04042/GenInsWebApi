@@ -15,7 +15,9 @@ namespace GenInsWebApi.Controllers
         [HttpPost]
         public object Check(renewApiClass ra)
         {
-            var res = db.Subscription_plan
+            try
+            {
+                var res = db.Subscription_plan
                         .Where(x => x.Policy_No == ra.policyNumber &&
                                         x.User_Registration.Email_ID == ra.email &&
                                             x.User_Registration.Phone_No == ra.mobile &&
@@ -37,37 +39,35 @@ namespace GenInsWebApi.Controllers
 
 
 
-            var responseObj = new renewCheckResponse();
-            if(res==null)
-            {
-                responseObj.message = "Invalid Policy Number";
-            }
-            else
-            {
-
-                var resByRegNo = db.Subscription_plan.Any(x => x.Reg_No == res.registeration_number && x.Status_of_sub == "Active");
-
-                if (resByRegNo == true || res.subscription_status=="Active")
+                var responseObj = new renewCheckResponse();
+                if (res == null)
                 {
-                    responseObj.message = "Already having active policy";
-
+                    responseObj.message = "Invalid Policy Number";
                 }
                 else
                 {
-                    responseObj = res;
-                    responseObj.subscription_status = res.subscription_status;
-                    responseObj.message = "Valid";
+
+                    var resByRegNo = db.Subscription_plan.Any(x => x.Reg_No == res.registeration_number && x.Status_of_sub == "Active");
+
+                    if (resByRegNo == true || res.subscription_status == "Active")
+                    {
+                        responseObj.message = "Already having active policy";
+
+                    }
+                    else
+                    {
+                        responseObj = res;
+                        responseObj.subscription_status = res.subscription_status;
+                        responseObj.message = "Valid";
+                    }
                 }
-
-
+                return responseObj;
             }
-            
-            
-            
-            
-
-            return responseObj;
-
+            catch(Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
         }
     }
 
