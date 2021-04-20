@@ -19,6 +19,7 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                //throw new Exception();
                 l.Password = Encryptword(l.Password);
                 var res = db.User_Registration
                             .Where(x => (x.Email_ID == l.Email_ID && x.Password == l.Password))

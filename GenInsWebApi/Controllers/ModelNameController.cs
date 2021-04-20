@@ -25,6 +25,7 @@ namespace GenInsWebApi.Controllers
 
                 });
                 //return Ok(res);
+                //throw new Exception();
                 return res;
             }
             catch(Exception e)

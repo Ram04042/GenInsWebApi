@@ -26,9 +26,10 @@ namespace GenInsWebApi.Controllers
                     Brand_Id = x.Brand_Names.Brand_Id
 
                 }).Distinct();
-                throw new Exception();
+                //throw new Exception();
 
-                return Ok(res);
+                //return Ok(res);
+                return res;
             }
             catch(Exception e)
             {
