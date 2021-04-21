@@ -16,8 +16,9 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                //Get the claim details
                 var claim = db.Claim_Insurance
-                .Select(x => new AdminResponse()
+                .Select(x => new AdminResponse()// collect the details required in the admin page from class
                 {
                     Claim_no = x.Claim_no,
                     Policy_No = x.Policy_No,
@@ -41,8 +42,9 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                // Get the claim details with their clain number
                 var claim_info = db.Claim_Insurance
-                .Where(x => x.Claim_no == Claim_no)
+                .Where(x => x.Claim_no == Claim_no)//compare the id we selected is equal to the id
                 .Select(x => new AdminResponse()
                 {
                     Claim_no = x.Claim_no,
@@ -63,13 +65,14 @@ namespace GenInsWebApi.Controllers
             
         }
         [HttpPut]
-        public IHttpActionResult Update(int Claim_no,Admin insurance)
+        public IHttpActionResult Update(int Claim_no,Admin insurance)// update the status and claim amount by claim no
         {
             try
             {
+                // update the status and claim amount by claim no
                 var info = db.Claim_Insurance
                 .Where(x => x.Claim_no == Claim_no).FirstOrDefault<Claim_Insurance>();
-                if (info != null)
+                if (info != null)//if not null the status and amount will be updated
                 {
                     insurance.message = "Successfull";
                     info.Claim_approval_status = insurance.Claim_approval_status;
@@ -92,6 +95,7 @@ namespace GenInsWebApi.Controllers
         }
     }
 
+    //class declaration for the object passed to api
     public class AdminResponse
     {
         public int Claim_no { get; set; }
