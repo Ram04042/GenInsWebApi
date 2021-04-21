@@ -20,40 +20,41 @@ namespace GenInsWebApi.Controllers
 
         public object Adminlogin(AdminloginResponse adminlogin)
         {
-            try
+            adminlogin.Password = Encryptword(adminlogin.Password);
+
+            // check for the username and password match
+
+            var res = db.Admins
+                        .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
+                        .Select(x => new AdminloginResponse()
+                        {
+                            Admin_id = x.Admin_id,
+                            message = "Successfull"
+                        })
+                        .FirstOrDefault();
+
+            if (res != null)
             {
-                //encrypt the password 
-
-                adminlogin.Password = Encryptword(adminlogin.Password);
-
-                // check for the username and password match
-
-                var res = db.Admins
-                            .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
-                            .Select(x => new AdminloginResponse()
-                            {
-                                Admin_id = x.Admin_id,
-                                message = "Successfull"
-                            })
-                            .FirstOrDefault();
-
-                if (res != null)
-                {
-                    return res;
-                }
-
-                res = new AdminloginResponse();
-                res.message = "Invalid";
                 return res;
             }
 
-            //catches an exception
+            res = new AdminloginResponse();
+            res.message = "Invalid";
+            return res;
+            //try
+            //{
+            //    //encrypt the password 
 
-            catch (Exception e)
-            {
-                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-                return response;
-            }
+                
+            //}
+
+            ////catches an exception
+
+            //catch (Exception e)
+            //{
+            //    HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+            //    return response;
+            //}
             
         }
         public string Encryptword(string Encryptval)
@@ -66,7 +67,9 @@ namespace GenInsWebApi.Controllers
             SrctArray = UTF8Encoding.UTF8.GetBytes(key);
 
             TripleDESCryptoServiceProvider objt = new TripleDESCryptoServiceProvider();
-
+            MD5CryptoServiceProvider objcrpt = new MD5CryptoServiceProvider();
+            SrctArray = objcrpt.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+            objcrpt.Clear();
             //set the secret key for the tripleDES algorithm
 
             objt.Key = SrctArray;
