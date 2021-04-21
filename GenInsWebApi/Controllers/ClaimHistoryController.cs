@@ -17,12 +17,7 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
-                //var Policy_No = db.Subscription_plan
-                //    .Where(x => x.User_Id == User_Id)
-                //    .Select(x => new claimInfo()
-                //    {
-                //        Policy_No = x.Policy_No
-                //    });
+                //check for user id and policy number match with database
 
                 var res = db.Claim_Insurance
                     .Where(x => x.Subscription_plan.User_Id == User_Id && x.Subscription_plan.Policy_No == x.Policy_No)
@@ -36,7 +31,10 @@ namespace GenInsWebApi.Controllers
                     }).ToList();
                 return res;
             }
-            catch(Exception e)
+
+            //catches an exception
+
+            catch (Exception e)
             {
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
                 return response;
