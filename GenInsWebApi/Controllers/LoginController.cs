@@ -12,6 +12,7 @@ namespace GenInsWebApi.Controllers
 {
     public class LoginController : ApiController
     {
+        //key used for encryption
         string key = "1prt56";
 
         General_InsuranceEntities db = new General_InsuranceEntities();
@@ -19,8 +20,10 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
-                //throw new Exception();
+                //key used for encryption
                 l.Password = Encryptword(l.Password);
+
+                //check for the correct email id and password for user in db
                 var res = db.User_Registration
                             .Where(x => (x.Email_ID == l.Email_ID && x.Password == l.Password))
                             .Select(x => new loginResponse()
@@ -35,7 +38,7 @@ namespace GenInsWebApi.Controllers
                             })
                             .FirstOrDefault();
 
-                if (res != null)
+                if (res != null)//res will not return null if valid
                 {
                     return res;
                 }
@@ -54,25 +57,40 @@ namespace GenInsWebApi.Controllers
         public string Encryptword(string Encryptval)
         {
             byte[] SrctArray;
+
+            //get the byte code of the string and key
             byte[] EnctArray = UTF8Encoding.UTF8.GetBytes(Encryptval);
             SrctArray = UTF8Encoding.UTF8.GetBytes(key);
             TripleDESCryptoServiceProvider objt = new TripleDESCryptoServiceProvider();
             MD5CryptoServiceProvider objcrpt = new MD5CryptoServiceProvider();
+
+            //set the secret key for tripleDES algorithm
             SrctArray = objcrpt.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
             objcrpt.Clear();
             objt.Key = SrctArray;
+
+            //mode of operation- electronic code block
             objt.Mode = CipherMode.ECB;
+
+            //padding mode(if any extra byte added)
             objt.Padding = PaddingMode.PKCS7;
             ICryptoTransform crptotrns = objt.CreateEncryptor();
+
+            //transform the specifies region of bytes array to resultArray
             byte[] resArray = crptotrns.TransformFinalBlock(EnctArray, 0, EnctArray.Length);
+
+            //release sources released by tripleDES encryptor
             objt.Clear();
+
+            //return the encrypted data into unreadable string format
             return Convert.ToBase64String(resArray, 0, resArray.Length);
+
         }
 
     }
 
 
-
+    //class declaration for the object passed to api
     public class loginResponse
     {
         public int User_Id { get; set; }
@@ -86,8 +104,6 @@ namespace GenInsWebApi.Controllers
         public Nullable<System.DateTime> DOB { get; set; }
 
         public string Address { get; set; }
-
-
 
         public string message { get; set; }
 
