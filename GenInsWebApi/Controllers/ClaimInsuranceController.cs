@@ -16,7 +16,7 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
-                throw new Exception();
+                //throw new Exception();
                 bool UserAuthentication = db.Subscription_plan.Any(x => x.User_Id == claim.User_Id && x.Policy_No == claim.Policy_No);
                 bool PolicyActive = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub == "active");
                 bool ClaimExists = db.Claim_Insurance.Any(x => x.Policy_No == claim.Policy_No && (x.Claim_approval_status == "Pending" || x.Claim_approval_status == "Under Verification"));
@@ -35,7 +35,7 @@ namespace GenInsWebApi.Controllers
                     claim_insurance.Injury_to_Thirdparty = claim.Injury_to_Thirdparty;
                     claim_insurance.Claim_approval_status = claim.Claim_approval_status;
                     claim_insurance.Claim_amt = claim.Claim_amt;
-
+                    claim_insurance.Claim_approval_status = "Pending";
                     claim.Claim_approval_status = "Pending";
                     db.Claim_Insurance.Add(claim_insurance);
                     db.SaveChanges();
