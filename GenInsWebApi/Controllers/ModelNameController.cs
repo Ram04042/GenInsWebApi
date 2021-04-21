@@ -11,12 +11,13 @@ namespace GenInsWebApi.Controllers
     public class ModelNameController : ApiController
     {
         General_InsuranceEntities db = new General_InsuranceEntities();
+
+        // Gets Model Names of Vehicles from Model_od_prem_amt table based on Brand Id
         [HttpPost]
         public object getModels(brandIdVehtypeApiClass ba)
         {
             try
             {
-                //throw new Exception();
                 var res = db.Model_od_prem_amt
                 .Where(x => x.Brand_Id == ba.Brand_Id && x.vehicle_type == ba.vehicle_type)
                 .Select(x => new modelsResponse()
@@ -25,7 +26,6 @@ namespace GenInsWebApi.Controllers
                     Model_Name = x.Model_Name
 
                 });
-                //return Ok(res);
                 return res;
             }
             catch(Exception e)
@@ -40,6 +40,7 @@ namespace GenInsWebApi.Controllers
 
     }
 
+    // Class Declaration for the object passed to Api
     public class brandIdVehtypeApiClass
     {
         public int Brand_Id { get; set; }
@@ -47,6 +48,8 @@ namespace GenInsWebApi.Controllers
         public string vehicle_type { get; set; }
 
     }
+
+    // Class Declaration for the object to pass as response
     public class modelsResponse
     {
         public int? Brand_Id { get; set; }

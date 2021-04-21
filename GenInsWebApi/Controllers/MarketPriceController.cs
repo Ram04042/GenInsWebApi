@@ -13,6 +13,8 @@ namespace GenInsWebApi.Controllers
        
         General_InsuranceEntities db = new General_InsuranceEntities();
 
+
+        // Gets Market Price of Vehicle form Model_od_prem_amt Table based on Model Name
         [HttpGet]
         public IHttpActionResult getMarketPrice(string Model_Name)
         {
@@ -36,10 +38,11 @@ namespace GenInsWebApi.Controllers
         }
     }
 
+
+    // Class Declaration for the object to pass as response
     public class marketPriceResponse
     { 
         public decimal? Market_Price { get; set; }
-       
 
     }
 }

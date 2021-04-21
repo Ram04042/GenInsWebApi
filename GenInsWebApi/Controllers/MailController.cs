@@ -75,6 +75,7 @@ namespace GenInsWebApi.Controllers
             
         }
 
+
         public string Encryptword(string Encryptval)
         {
             byte[] SrctArray;
