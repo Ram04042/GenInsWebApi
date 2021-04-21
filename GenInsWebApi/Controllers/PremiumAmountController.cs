@@ -14,32 +14,43 @@ namespace GenInsWebApi.Controllers
     {
         General_InsuranceEntities db = new General_InsuranceEntities();
 
+        // Gets value of Factors that is required for Calculating Insurance Premium Amount
         [HttpPost]
         public object getpremimum(premapiclass pc)
         {
             try
             {
+                // Gets Own Damage Premium Percentage from Model_od_prem_amt table based on Model Name passed to API
                 var odpremper = db.Model_od_prem_amt
-                .Where(x => x.Model_Name == pc.Model_Name)
-                .Select(x => new premapires()
-                {
-                    od_prem_per = x.Veh_based_od_prem
-                }).FirstOrDefault();
+                                .Where(x => x.Model_Name == pc.Model_Name)
+                                .Select(x => new premapires()
+                                {
+                                    od_prem_per = x.Veh_based_od_prem
 
+                                }).FirstOrDefault();
+
+
+                // Gets Fixed Third Party Premium Amount based on the range to which the Vehcicle CC passed to API belongs
                 var thirdpartyprem = db.Third_Party_Prem
-                    .Where(x => pc.vehicle_cc >= x.Vehicle_CC_Min && pc.vehicle_cc <= x.Vehicle_CC_Max && x.Vehicle_Type == pc.vehicle_type)
-                    .Select(x => new premapires()
-                    {
-                        thirdpartyprem = x.Fixed_TP_Prem
-                    }).FirstOrDefault();
+                                    .Where(x => pc.vehicle_cc >= x.Vehicle_CC_Min && pc.vehicle_cc <= x.Vehicle_CC_Max && x.Vehicle_Type == pc.vehicle_type)
+                                    .Select(x => new premapires()
+                                    {
+                                        thirdpartyprem = x.Fixed_TP_Prem
 
+                                    }).FirstOrDefault();
+
+
+                // Gets Depreciation Percentage from Depreciation_Percentage table based on Age of Vehicle in years
                 var depper = db.Depreciation_Percentage
-                    .Where(x => x.Age == pc.age)
-                    .Select(x => new premapires()
-                    {
-                        dep_per = x.Depreciation_percentage1
-                    }).FirstOrDefault();
+                            .Where(x => x.Age == pc.age)
+                            .Select(x => new premapires()
+                            {
+                                dep_per = x.Depreciation_percentage1
 
+                            }).FirstOrDefault();
+
+
+                // Returning Factors like OD Premium Percentage, Fixed TP Amount and Depreciation as API Response
                 premapires resobj = new premapires();
                 resobj.od_prem_per = odpremper.od_prem_per;
                 resobj.thirdpartyprem = thirdpartyprem.thirdpartyprem;
@@ -59,6 +70,7 @@ namespace GenInsWebApi.Controllers
 
 
 
+    // Class Declaration for the object to pass as response
     public class premapires
     {
         public double? od_prem_per { get; set; }
@@ -69,6 +81,8 @@ namespace GenInsWebApi.Controllers
 
     }
 
+
+    // Class Declaration for the object passed to Api
     public class premapiclass
     {
         public string Model_Name { get; set; }

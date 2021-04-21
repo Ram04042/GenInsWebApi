@@ -16,13 +16,23 @@ namespace GenInsWebApi.Controllers
         {
             try 
             { 
+                //checking for user id and policy number match with database
+
                 bool UserAuthentication = db.Subscription_plan.Any(x => x.User_Id == claim.User_Id && x.Policy_No == claim.Policy_No);
+
+                //checking for active subscription
+
                 bool PolicyActive = db.Subscription_plan.Any(x => x.Policy_No == claim.Policy_No && x.Status_of_sub=="active");
+
+                //checking for pending and under verfictation claims
+
                 bool ClaimExists = db.Claim_Insurance.Any(x => x.Policy_No == claim.Policy_No && (x.Claim_approval_status == "Pending" || x.Claim_approval_status == "Under Verification"));
             
                 if(UserAuthentication == true && PolicyActive == true && ClaimExists != true)
                 {
                     Claim_Insurance claim_insurance = new Claim_Insurance();
+
+                    //adding element values to the claim insurance object
 
                     claim_insurance.Claim_no = claim.Claim_no;
                     claim_insurance.Policy_No = claim.Policy_No;
@@ -37,9 +47,14 @@ namespace GenInsWebApi.Controllers
 
                     claim_insurance.Claim_approval_status = "Pending";
                     claim.Claim_approval_status = "Pending";
+
+                    //adding changes to database
+
                     db.Claim_Insurance.Add(claim_insurance);
                     db.SaveChanges();
+
                     claim.message = "Successfull";
+
                     return Ok(claim);
                 }
                 else
@@ -61,7 +76,10 @@ namespace GenInsWebApi.Controllers
                         }
                  }
             }
-            catch(Exception e)
+
+            //catches an exception
+
+            catch (Exception e)
             {
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
                 return Ok(response);

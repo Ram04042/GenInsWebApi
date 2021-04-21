@@ -16,9 +16,12 @@ namespace GenInsWebApi.Controllers
         {
             try
             {
+                //checking active subscription plans
+
                 bool subsPlanExists = db.Subscription_plan.Any(x => x.Reg_No == robj.registration_no && x.Status_of_sub == "Active");
 
                 var responseobj = new response();
+
                 if (subsPlanExists != true)
                 {
                     responseobj.message = "Valid";
@@ -30,6 +33,9 @@ namespace GenInsWebApi.Controllers
 
                 return Ok(responseobj);
             }
+
+            //catches an exception
+
             catch(Exception e)
             {
                 HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
