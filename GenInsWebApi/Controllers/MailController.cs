@@ -113,7 +113,9 @@ namespace GenInsWebApi.Controllers
             SrctArray = UTF8Encoding.UTF8.GetBytes(key);
 
             TripleDESCryptoServiceProvider objt = new TripleDESCryptoServiceProvider();
-
+            MD5CryptoServiceProvider objcrpt = new MD5CryptoServiceProvider();
+            SrctArray = objcrpt.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+            objcrpt.Clear();
             //set the secret key for the tripleDES algorithm
 
             objt.Key = SrctArray;
