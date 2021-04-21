@@ -12,6 +12,7 @@ namespace GenInsWebApi.Controllers
     {
         General_InsuranceEntities db = new General_InsuranceEntities();
 
+        // Gets the Brand Names of Vehicles from Model_od_prem_amt table based on Vehicle type
         [HttpPost]
         public object getBrands(vehTypeApiClass va)
         {
@@ -40,10 +41,15 @@ namespace GenInsWebApi.Controllers
 
     }
 
+
+    // Class Declaration for the object passed to Api
     public class vehTypeApiClass
     {
         public string vehicle_type { get; set; }
     }
+
+
+    // Class Declaration for the object to pass as response
     public class brandsResponse
     {
         public string vehicle_type { get; set; }

@@ -12,6 +12,7 @@ namespace GenInsWebApi.Controllers
     {
         General_InsuranceEntities db = new General_InsuranceEntities();
 
+        // Gets Entire Policy Details for User based on Policy No and also checks if User has that Policy No
         [HttpPost]
         public object getPolicyDetails(policyDetailsApi policyobj)
         {
@@ -35,7 +36,6 @@ namespace GenInsWebApi.Controllers
                             Chasis_No = x.Vehicle_Info.Chasis_No,
                             veh_purchase_date = x.Vehicle_Info.Veh_purchase_date,
 
-
                             plan_type = x.Policy_Plans.Plan_type,
                             plan_duration = x.Policy_Plans.Duration,
                             Sub_date = x.Sub_date,
@@ -49,20 +49,17 @@ namespace GenInsWebApi.Controllers
                             total_od = x.Total_od_prem_amt,
                             total_payable = x.Total_Payable,
 
-
-
-
                         })
                         .FirstOrDefault();
 
 
-                if (res == null)
+                if (res == null)  // res will be null if User do not have that Policy No 
                 {
                     var errrorRes = new policyDetailsResponse();
                     errrorRes.message = "Access Denied";
                     return errrorRes;
                 }
-                else
+                else 
                 {
                     return res;
                 }
@@ -76,6 +73,7 @@ namespace GenInsWebApi.Controllers
         }
     }
 
+    // Class Declaration for the object to pass as Response
     public class policyDetailsResponse
     {
         public string Name { get; set; }
@@ -93,46 +91,24 @@ namespace GenInsWebApi.Controllers
         public int Policy_No { get; set; }
         public string Status_of_sub { get; set; }
         public string license_no { get; set; }
-
         public DateTime? veh_purchase_date { get; set; }
-
         public decimal? market_price { get; set; }
-
         public string plan_type { get; set; }
-
         public int? plan_duration { get; set; }
-
         public decimal? idv { get; set; }
-
         public decimal? total_tp { get; set; }
-
         public decimal? total_od { get; set; }
-
         public decimal? total_payable { get; set; }
-
         public string message { get; set; }
-
-        public int payment_id { get; set; }
-
-
-
-
-        public string card_holder_name { get; set; }
-
-        public decimal card_no { get; set; }
-
-        public int card_exp_month { get; set; }
-
-        public int card_exp_year { get; set; }
-
-        public int card_cvc { get; set; }
 
     }
 
+    // Class Declaration for the object passed to API
     public class policyDetailsApi
     {
         public int User_Id { get; set; }
         public int policy_no { get; set; }
+
     }
 
 
