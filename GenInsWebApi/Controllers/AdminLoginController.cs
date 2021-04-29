@@ -24,7 +24,13 @@ namespace GenInsWebApi.Controllers
 
             // check for the username and password match
 
-            var res = db.Admins
+            
+
+            
+            try
+            {
+                //encrypt the password 
+                var res = db.Admins
                         .Where(x => (x.Admin_id == adminlogin.Admin_id && x.Password == adminlogin.Password))
                         .Select(x => new AdminloginResponse()
                         {
@@ -33,29 +39,24 @@ namespace GenInsWebApi.Controllers
                         })
                         .FirstOrDefault();
 
-            if (res != null)
-            {
+                if (res != null)
+                {
+                    return res;
+                }
+                res = new AdminloginResponse();
+                res.message = "Invalid";
                 return res;
+
             }
 
-            res = new AdminloginResponse();
-            res.message = "Invalid";
-            return res;
-            //try
-            //{
-            //    //encrypt the password 
+            //catches an exception
 
-                
-            //}
+            catch (Exception e)
+            {
+                HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
+                return response;
+            }
 
-            ////catches an exception
-
-            //catch (Exception e)
-            //{
-            //    HttpResponseMessage response = Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Bad Request");
-            //    return response;
-            //}
-            
         }
         public string Encryptword(string Encryptval)
         {
